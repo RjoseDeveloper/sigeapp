@@ -8,7 +8,7 @@ $con = $db->openConection();
 <html>
 
 <head>
-	<title>SIGeIRES</title>
+	<title>SIGeIRIS</title>
 
 	<!--/tags -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">

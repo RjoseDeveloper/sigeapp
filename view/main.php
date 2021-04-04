@@ -99,7 +99,7 @@ if (!isset($_SESSION['username'])){ ?>
                     <div class="menu-logo" style="">
                         <div class="navbar-brand">
                 <span class="navbar-logo">
-                    etchicola
+                   SIGeIRES
                 </span>
                         </div>
                     </div>
