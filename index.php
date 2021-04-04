@@ -55,7 +55,7 @@ $con = $db->openConection();
 
                                 <i class="fa fa-folder-open" aria-hidden="true"></i>
 
-						SIGEIRES <span class="desc">Sistema de Gestão Academica</span></a></h1>
+						SIGAIRIS <span class="desc">Sistema de Gestão Academica</span></a></h1>
 					</div>
 				</div>
 
@@ -90,11 +90,11 @@ $con = $db->openConection();
 
     <div class="col-sm-3 newsright">&nbsp</div>
 		
-		<div class=" col-sm-6 form_login" style="text-align:justify; background: #ccc; margin-top: 5em" align="center">
+		<div class=" col-sm-6 form_login" style="text-align:justify; background: #F8F9F9; margin-top: 5em" align="center">
 		
                   <div class="modal-body" style="padding: 30px 50px">
                       <div class="result_login alert alert-info">
-                          <span class="badge badge-pill badge-info">SIGEIRES</span>
+                          <span class="badge badge-pill badge-info">SIGAIRIS</span>
 
                       </div>
                       <hr>
@@ -129,12 +129,12 @@ $con = $db->openConection();
      <div class="modal-body form_register" style=";padding: 30px 50px">
 
                       <div class="result_register alert alert-info">
-                          <span class="badge badge-pill badge-info">SIGEIRES</span>
+                          <span class="badge badge-pill badge-info">SIGAIRIS</span>
 
                       </div>
 
 
-     <form class="form-horizontal" style=";padding: 10px 30px; background: #ccc" method="post" id="guardar_usuario" name="guardar_usuario">
+     <form class="form-horizontal" style=";padding: 10px 30px; background:#F8F9F9" method="post" id="guardar_usuario" name="guardar_usuario">
 
                 
                     <div id="resultados_ajax" style=""></div>
