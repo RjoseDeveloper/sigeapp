@@ -22,7 +22,7 @@ if (!isset($_SESSION['username'])){ ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>SIGePautas</title>
+        <title>SIGaIRIS</title>
         <meta name="keywords" content="" />
 		<meta name="description" content="" />
 <!--
@@ -99,7 +99,7 @@ if (!isset($_SESSION['username'])){ ?>
                     <div class="menu-logo" style="">
                         <div class="navbar-brand">
                 <span class="navbar-logo">
-                    etchicola
+                    SIGeIRES
                 </span>
                         </div>
                     </div>

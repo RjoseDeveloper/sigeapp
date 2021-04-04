@@ -28,8 +28,6 @@
                     <input type="text" required="" name="descricao" class="form-control" value="" id="descricao" placeholder="Descrição da Disciplina"/>
                     <input type="text" required="" name="credito" class="form-control" value="" id="credito" placeholder="Creditos"/>
                     
-                    
-
                         <div class="row">
 
                             <div class="col-md-4">
@@ -63,7 +61,7 @@
                             <div class="col-md-4">
 
                                 <select name="curso" id="curso" class="form-control" required="">
-                                    <option value="" data-theme="a" desable="desable"> -- Curso -- </option>
+                                    <option value="" data-theme="a" desable="desable"> -- Classe -- </option>
 
                                     <?php
 
