@@ -14,8 +14,7 @@ if (!isset($_SESSION['username'])){?>
     require_once('../../Query/EstudantesSQL.php');
     require_once '../../Query/RegistoAcademicoSQL.php';
     require_once('../../Query/EstudantesSQL.php');
-    require_once('../../controller/EstudanteNotaCtr.php');
-    require_once('../../controller/EstudanteCtr.php');
+    
     require '../../requestCtr/Processa_gestao_academica.php';
     require '../classes/Functions.php';
 

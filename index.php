@@ -8,7 +8,7 @@ $con = $db->openConection();
 <html>
 
 <head>
-	<title>SIGeIRIS</title>
+	<title>SIGaIRIS</title>
 
 	<!--/tags -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -373,10 +373,10 @@ $con = $db->openConection();
         }
     }
 
-    var domains = ["unilurio", "", ""];
+    var domains = ["dominio", "", ""];
 
     function validateDomainEmail(me) {
-        $('.vemail').html("Ex. nome@unilurio.ac.mz");
+        $('.vemail').html("Ex. nome@example.com");
 
 
     }
