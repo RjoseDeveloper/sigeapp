@@ -99,7 +99,11 @@ if (!isset($_SESSION['username'])){ ?>
                     <div class="menu-logo" style="">
                         <div class="navbar-brand">
                 <span class="navbar-logo">
+<<<<<<< HEAD
                     SIGeIRES
+=======
+                   SIGeIRES
+>>>>>>> 7fb5ddb6881948fe863ca660bd71b450b169a1d3
                 </span>
                         </div>
                     </div>
