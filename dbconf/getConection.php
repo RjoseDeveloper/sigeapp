@@ -6,7 +6,7 @@
         private $URL = "localhost";
         private $PASSWORD="dblinkx";
         private $USER ="root";
-        private $DB ="pautas_fe";
+        private $DB ="sigairis";
         private $PORT ="3306";
 
 
