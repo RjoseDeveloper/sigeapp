@@ -11,7 +11,7 @@ include('../ajax/is_logged.php');
 require_once('../../Query/AlunoSQL.php');
 require_once '../../dbconf/getConection.php';
 
-if ($_SESSION['tipo'] == 'estudante'){
+if ($_SESSION['tipo'] == 'aluno'){
     require_once '../layouts/head.php';
 }
 $db = new mySQLConnection();
@@ -29,7 +29,7 @@ if (isset($_GET['id'])) {
     $count = mysqli_num_rows($query);
 
     if ($count == 0) {
-        if ($delete1 = mysqli_query($con, "DELETE * FROM aluno WHERE idaluno ='" . $id_aluno . "'")) {
+        if ($delete1 = mysqli_query($con, "DELETE * FROM utilizador WHERE id ='" . $id_aluno . "'")) {
             ?>
             <div class="alert alert-success alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
@@ -86,12 +86,14 @@ if ($action == 'ajax') {
     $offset = ($page - 1) * $per_page;
     //Count the total number of row in your table*/
 
-    if ($_SESSION['tipo'] == 'estudante'){
+    if ($_SESSION['tipo'] == 'aluno'){
 
         $user_id = $_SESSION['id'];
         $queries = $pessoa->get_all_pessoa(1,$user_id);
-        $count_query = mysqli_query($con, "SELECT count(*) AS numrows FROM aluno WHERE aluno.idutilizador=".$user_id);
+        $count_query = mysqli_query($con, "SELECT count(*) AS numrows 
+            FROM utilizador WHERE utilizador.id=".$user_id);
         //echo  $queries;
+       
     }else{
         $queries = $pessoa->get_all_pessoa(0,0)." $sWhere LIMIT $offset,$per_page";
         $count_query = mysqli_query($con, "SELECT count(*) AS numrows FROM $sTable $sWhere");
@@ -101,7 +103,7 @@ if ($action == 'ajax') {
     $row = mysqli_fetch_assoc($count_query);
     $numrows = $row['numrows'];
     $total_pages = ceil($numrows / $per_page);
-    $reload = './estudante.php';
+    $reload = './aluno.php';
     //main query to fetch the da
     $query = mysqli_query($con, $queries);
     //echo $queries;

@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Raimundo Jose
+ * User: User
  * Date: 12/5/2018
  * Time: 7:23 AM
  */
@@ -13,7 +13,7 @@ class AlunoSQL {
 
         $sql ='SELECT DISTINCT * from utilizador INNER JOIN distrito ON distrito.iddistrito = utilizador.iddistrito WHERE utilizador.idprevilegio = 1' ;
 
-        if ($ctr != 0){ $sql.=" AND utilizador.id ='$iduser' OR utilizador.username='$iduser'"; }
+        if ($ctr != 0){$sql.=" AND utilizador.id ='$iduser' OR utilizador.username='$iduser'"; }
         return $sql;
     }
 

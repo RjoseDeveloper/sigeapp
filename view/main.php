@@ -105,7 +105,7 @@ if (!isset($_SESSION['username'])){ ?>
                         </div>
                     </div>
 
-                    <?php if ($_SESSION['tipo'] == 'estudante'){?>
+                    <?php if ($_SESSION['tipo'] == 'aluno'){?>
 
                     <div class="navbar-collapse collapse" id="templatemo-nav-bar">
                     <ul class="nav navbar-nav navbar-right" style="margin-bottom: 2px">
@@ -231,7 +231,7 @@ if (!isset($_SESSION['username'])){ ?>
             <div class="main-content" style="">
                 <?php
 
-                if ($_SESSION['tipo'] == 'estudante'){
+                if ($_SESSION['tipo'] == 'aluno'){
                     $page_init = 'aluno/buscar_alunos.php?action=ajax&q=x';
 
                 }elseif ($_SESSION['tipo'] == 'dir_adjunto_pedag' || $_SESSION['tipo'] == 'director'){
@@ -240,13 +240,7 @@ if (!isset($_SESSION['username'])){ ?>
                 elseif ($_SESSION['tipo'] == 'racademico'){
                     $page_init = 'registo_academico/Gestao_Academica.php';
                 }
-
-                elseif ($_SESSION['tipo'] == 'visitante'){
-                    $page_init = 'home/visitante.php';
-				
-                }else{
-                    $page_init = 'home/visitante.php';
-                }
+ 
                 ?>
                 <iframe  src="<?php echo $page_init ?>"
                         width="100%" height="2000" overflow="hidden" name="frm_content" frameborder="0" id="iframe" onload=""></iframe>

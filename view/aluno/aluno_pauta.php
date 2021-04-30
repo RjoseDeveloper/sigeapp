@@ -10,14 +10,9 @@ if (!isset($_SESSION['username'])){?>
 <?php }else{
 
     require_once("../../dbconf/getConection.php");
-    require_once('../../controller/PautaNormalCtr.php');
-    require_once('../../Query/PublicacaoPautaSQL.php');
     require_once('../../Query/AllQuerySQL.php');
     require_once('../../Query/EstudantesSQL.php');
-    require_once('../../controller/EstudanteNotaCtr.php');
-    require_once('../../controller/PautaNormalCtr.php');
-    require_once('../../controller/EstudanteCtr.php');
-
+  
     $estudante_sql = new EstudantesSQL();
     $db = new mySQLConnection();
     $query = new QuerySql();
@@ -26,8 +21,6 @@ if (!isset($_SESSION['username'])){?>
     $idcurso = $estudante_sql->obterIdCursoEstudante($idAluno);
     $semestre = date('m') < 7 ? '1º':' 2º';
     $ano = date('Y');
-
-    $pautaControlle = new PublicarPauta();
     $curso = '';
 
 } ?>

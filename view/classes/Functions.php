@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Raimundo Jose
+ * User: User
  * Date: 2/4/2019
  * Time: 10:59 PM
  */
@@ -55,4 +55,23 @@ WHERE curso.idcurso = '$id'";
 
         return $value;
     }
+
+
+    function createRandomCode() { 
+
+    $chars = "0123456789"; 
+    srand((double)microtime()*1000000); 
+    $i = 0; 
+    $pass = '' ; 
+
+    while ($i <= 7) { 
+        $num = rand() % 33; 
+        $tmp = substr($chars, $num, 1); 
+        $pass = $pass . $tmp; 
+        $i++; 
+    } 
+
+    return $pass.''.date("Y"); 
+
+} 
 }
