@@ -53,7 +53,7 @@ if (!isset($_SESSION['username'])){?>
 
     <?php  include '../layouts/head.php' ?>
 
-    <link href="../fragments/css/css_mystyle.css"  rel='stylesheet' type='text/css'>
+   
     <script type="text/javascript" src="../fragments/js/js_estudante.js"></script>
     <script type="text/javascript" src="../fragments/js/js_function.js"></script>
     <script type="text/javascript" src="../fragments/js/js_registo_academico.js"></script>
@@ -65,11 +65,11 @@ if (!isset($_SESSION['username'])){?>
 <div class="container" style="background: #fff">
 
                 <div class="col-md-5" style="float: left">
-                    <label for="">Curso:</label>
+                    <label for="">Classe:</label>
 
                     <select onchange="buscar_disciplina(this.value)" class="form-control">
 
-                        <option value="0" data-theme="b" ><span class="glyphicon glyphicon-list"></span> Seleccionar Curso</option>
+                        <option value="0" data-theme="b" ><span class="glyphicon glyphicon-list"></span> Seleccionar Classe</option>
 
                         <?php
 
@@ -113,8 +113,10 @@ if (!isset($_SESSION['username'])){?>
 
 <label>Semestre:</label>
         <select class="form-control">
-            <option>Semestre 1</option>
-            <option>Semestre 2</option>
+            <option>1º Trimestre</option>
+            <option>2º Trimestre</option>
+             <option>3º Trimestre </option>
+            
         </select>
 
         <div class="pull-right"><br>
@@ -144,7 +146,7 @@ if (!isset($_SESSION['username'])){?>
                     <div class="modal-header alert">
                         <button type="button"  style=" border: none" data-mini="true" data-inline="true"
                                 class="close" data-dismiss="modal">&times;</button>
-                        <h3 class=" modal-title" style="">Pautas do Estudante <span class="nome_aluno"></span></h3>
+                        <h3 class=" modal-title" style="">Pautas do Aluno <span class="nome_aluno"></span></h3>
                     </div>
 
                     <div class="modal-body">

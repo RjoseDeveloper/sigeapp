@@ -172,7 +172,7 @@ if (!isset($_SESSION['username'])){ ?>
 
                                     <li><a href="actividade/activity_session.php" target="frm_content">Sessão de Pagamento</a></li>
                                     <li><a href="contabilidade/facturas.php" target="frm_content">Gerir Pagamentos Alunos</a></li>
-                                    <li><a href="contabilidade/despesas.php" target="frm_content">Gerir Despesas e Orçamentos</a></li>
+                                   
                                     <li><a href="contabilidade/factura.php" target="frm_content">Relatórios Financeiros</a></li>
 
                                     <span class=""></span>

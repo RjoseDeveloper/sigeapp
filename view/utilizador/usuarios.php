@@ -19,7 +19,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-	<?php include("../layouts/head.php");?>
+	<?php include("../layouts/head.php");
+	include("form_usuarios.php");
+
+	?>
   </head>
   <body>
 
@@ -28,7 +31,7 @@
 		<div class="panel-heading">
 		    <div class="btn-group pull-right">
 
-				<button type='button' class="btn btn-default" data-toggle="modal" data-backdrop="false" data-target="#myModal">
+				<button type='button' class="btn btn-default" data-toggle="modal" data-backdrop="false" data-target="#modal-usuario">
                     <span class="glyphicon glyphicon-plus" ></span> Adiccionar</button>
 			</div>
 
