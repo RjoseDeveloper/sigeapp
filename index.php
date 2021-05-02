@@ -295,10 +295,18 @@ $con = $db->openConection();
                                 
 
                                 <select class="form-control" id="nivelescolar" name="nivelescolar"  required>
-                                    <option value="1">7ª</option>
-                                    <option value="2">8ª</option>
-                                    <option value="3">9ª</option>
+                                    <option value="1">1ª</option>
+                                    <option value="2">2ª</option>
+                                    <option value="3">3ª</option>
+                                    <option value="4">4ª</option>
+                                    <option value="4">5ª</option>
+                                    <option value="4">6ª</option>
+                                    <option value="4">7ª</option>
+                                    <option value="4">8ª</option>
+                                    <option value="4">9ª</option>
                                     <option value="4">10ª</option>
+                                    <option value="4">11ª</option>
+                                    <option value="4">12ª</option>
                                 </select>
                             </div>
 

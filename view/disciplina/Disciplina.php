@@ -26,39 +26,24 @@
                    
 <div id="resultados_ajax"></div><!-- Carga los datos ajax -->
                     <input type="text" required="" name="descricao" class="form-control" value="" id="descricao" placeholder="Descrição da Disciplina"/>
-                    <input type="text" required="" name="credito" class="form-control" value="" id="credito" placeholder="Creditos"/>
+                    <input type="text" required="" name="credito" class="form-control" value="" id="credito" placeholder="Pontuação ou Creditos"/>
                     
                         <div class="row">
 
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <select name="natureza" id="natureza" class="form-control" required="">
 
                                     <option value="" data-theme="a" desable="desable"> -- Natureza -- </option> 
                                     <option value="Teorico/Pratico"> Teorico/Pratico </option>
                                     <option value="Modular"> Modular </option>
                                     <option value="Laboratorio"> Laboratorio </option>
-                                    <option value="Pesquisa de Campo">Pesquisa de Campo</option>
+                                    <option value="Pesquisa de Campo">Outro</option>
                                      
                                 </select>
                             </div>
 
-                            <div class="col-md-4">
 
-                                <select name="ano" id="ano" class="form-control" required="">
-                                    <option value="" data-theme="a" desable="desable"> -- Ano Académico -- </option>
-
-                                    <?php
-
-                                    $rs = mysqli_query($con, 'SELECT * FROM anolectivo');
-                                    while ($row = mysqli_fetch_assoc($rs)){?>
-                                        <option value="<?php echo $row['idano'] ?>"> <?php echo utf8_encode($row['nivel'])?> </option>
-                                    <?php } ?>
-                                     
-                                </select>
-
-                            </div>
-
-                            <div class="col-md-4">
+                            <div class="col-md-6">
 
                                 <select name="curso" id="curso" class="form-control" required="">
                                     <option value="" data-theme="a" desable="desable"> -- Classe -- </option>

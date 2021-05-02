@@ -26,16 +26,15 @@ include('../ajax/is_logged.php');//Archivo verifica que el usario que intenta ac
         $periodo = $_POST['regime'];
 
 		$date_added=date("Y-m-d");
-        $num ='00'. rand(2018,date('Y'));
+        $num =rand(date('Y'), 2000);
 
-		$sql="INSERT INTO curso(descricao, idperfil_instituicao, codigo, data_registo, qtd_turmas, taxa_matricula, idperiodo, coordenador)
-                                    VALUES('".$nombre."','".$estado."','" . $num . "','" .$date_added. "',
-                                            '" .$qtd_turma. "','" .$precio_venta. "','" .$periodo. "','" .$responsavel. "')";
+		$sql="INSERT INTO curso(descricao, codigo, data_registo, qtd_turmas, taxa_matricula, idperiodo, coordenador, details)
+                                    VALUES('".$nombre."','".$num."','" . $date_added . "','" .$qtd_turma. "','" .$precio_venta. "','" .$periodo. "','" .$responsavel. "','" .$nombre. "')";
 
 
         $query_new_insert = mysqli_query($con,$sql);
 			if ($query_new_insert) {
-                $messages[] = "Curso adicionado com sucesso.";
+                $messages[] = "Registo adicionado com sucesso.";
                 $last_row = $con->insert_id;
                 //echo $last_row;
 

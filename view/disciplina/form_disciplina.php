@@ -15,7 +15,7 @@
 			<div id="resultados_ajax_productos"></div>
 
 			   <div class="form-group">
-				<label for="codigo" class="col-sm-3 control-label">Nome do Curso / Classe:</label>
+				<label for="codigo" class="col-sm-3 control-label">Nome da Classe:</label>
 				<div class="col-sm-8">
 				  <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome do Curso .." required>
 				</div>
@@ -29,7 +29,7 @@
                             <option value="">-- Selecciona Instituicso --</option>
 
                             <?php
-                            $res = mysqli_query($con, 'SELECT * FROM perfil_instituicao');
+                            $res = mysqli_query($con, 'SELECT * FROM perfil');
                             while ($row = mysqli_fetch_assoc($res)){?>
                                 <option value="<?php echo $row['idperfil']?>"> <?php echo $row['nome_instituicao']?></option>
                             <?php }?>

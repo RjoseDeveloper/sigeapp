@@ -29,7 +29,7 @@
                             <option value="">-- Selecciona Instituicso --</option>
 
                             <?php
-                            $res = mysqli_query($con, 'SELECT * FROM perfil_instituicao');
+                            $res = mysqli_query($con, 'SELECT * FROM perfil');
                             while ($row = mysqli_fetch_assoc($res)){?>
                                 <option value="<?php echo $row['idperfil']?>"> <?php echo $row['nome_instituicao']?></option>
                             <?php }?>

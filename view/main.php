@@ -170,7 +170,7 @@ if (!isset($_SESSION['username'])){ ?>
 
                                 <ul class="dropdown-menu">
 
-                                    <li><a href="actividade/activity_session.php" target="frm_content">Sessão de Pagamento</a></li>
+                                    <li><a href="actividade/activity_session.php" target="frm_content">Sessão de Planificação</a></li>
                                     <li><a href="contabilidade/facturas.php" target="frm_content">Gerir Pagamentos Alunos</a></li>
                                    
                                     <li><a href="contabilidade/factura.php" target="frm_content">Relatórios Financeiros</a></li>
@@ -197,7 +197,7 @@ if (!isset($_SESSION['username'])){ ?>
                                 </ul>
                             </li>
 
-                             <li value=""><a href="utilizador/usuarios.php" target="frm_content">Gestao de Contas</a></li>
+                             <li value=""><a href="utilizador/usuarios.php" target="frm_content">Gestao de Utilizador</a></li>
 
                             <li class="dropdown" id="">
 

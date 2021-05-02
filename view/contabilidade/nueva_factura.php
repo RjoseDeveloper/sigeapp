@@ -202,11 +202,11 @@ $con = $db->openConection();
                 $('#dados_auto').show();
 
                 $.ajax({
-                    url: "./ajax/autocomplete/alunos.php",
+                    url: "../ajax/alunos.php",
                     data: {term: val},
                     dataType: 'json',
                     success: function (data) {
-                        console.log(data.id_aluno);
+                        alert(data.id_aluno);
 
                         html += '<ul class="list-group">';
                         html += '<li class="list-group-item" onclick="hiden(this.value)" value="'+data.id_aluno+'"><a>' + data.nomeCompleto + '</a>' +

@@ -57,12 +57,12 @@ if (empty($_POST['fullname'])){
     $user_password = $_POST['user_password_new'];
     $user_password_hash = password_hash($user_password, PASSWORD_DEFAULT);
     $endereco1 = $_POST['endereco1'];
-    $idestadocivil = $_POST['estadocivil'];
+    $idestadocivil =intval( $_POST['estadocivil']);
     $idprevilegio = $_POST['previlegio'];
     $celular1 = $_POST['celular1'];
     $celular2 = $_POST['celular2'];
     $sexo = $_POST['sexo'];
-    $iddistrito= $_POST['distrito'];
+    $iddistrito=intval( $_POST['distrito']);
     $date_added=date("Y-m-d");
     $codigo = $func->createRandomCode();
     $documento = $_POST['bi_recibo'];

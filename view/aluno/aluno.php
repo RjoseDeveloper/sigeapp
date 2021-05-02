@@ -9,6 +9,11 @@
         }
 
 	/* Connect To Database*/
+ 
+require_once '../../dbconf/getConection.php';
+$db = new mySQLConnection();
+$con = $db->openConection();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -70,6 +75,32 @@
 
   <script type="text/javascript">
       $(document).ready(function(){
+
+        $("#guardar_usuario" ).submit(function(event) {
+        $('#guardar_datos').attr("disabled", true);
+
+        var parametros = $(this).serialize();
+        //alert(parametros);
+        $.ajax({
+            type: "POST",
+            url: "../utilizador/nuevo_usuario.php",
+            data: parametros,
+            beforeSend: function(objeto){
+                $("#resultados_ajax").html("Mensagem: Carregando...");
+            },
+            success: function(datos){
+
+                             
+                $("#resultados_ajax").html(datos);
+                $('#guardar_datos').attr("disabled", false);
+                load(1);
+                
+            }
+        });
+        event.preventDefault();
+    });
+
+
 
           $("#registar_encarregado").submit(function( event ) {
               $('#btn_save_encarregado').attr("disabled", true);

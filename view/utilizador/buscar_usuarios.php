@@ -97,12 +97,13 @@
 			<div class="table-responsive">
 			  <table class="table">
 				<tr  class="info">
-					<th>CODIGO</th>
+					<th>ID</th>
 					<th>Nome Completo</th>
 					<th>Username</th>
-                    <th>Celular</th>
+                    <th>Password</th>
 					<th>Previlegio</th>
 					<th>Data de Registo</th>
+                    <th>Contactos</th>
                     <th>Sexo</th>
 					<th><span class="pull-right">Acções</span></th>
 					
@@ -112,6 +113,7 @@
 						$user_id=$row['id'];
 						$fullname=$row['fullname'];
 						$user_name=$row['username'];
+						$user_pass=$row['password'];
 						$user_role=$row['descricao'];
                         $user_email=$row['email'];
                         $role_id = $row['idprevilegio'];
@@ -132,9 +134,11 @@
 						<td><?php echo $user_id; ?></td>
 						<td><?php echo $fullname; ?></td>
 						<td ><?php echo $user_name; ?></td>
-                        <td><?php echo $sql_all->queryMaster($curso_id); ?></td>
+						<td ><?php echo $user_pass; ?></td>
+                 
 						<td ><?php echo $user_role; ?></td>
 						<td><?php echo $date_added;?></td>
+                        <td><?php echo $user_email;?></td>
                         <td><?php echo $sexo;?></td>
 						
 					<td>

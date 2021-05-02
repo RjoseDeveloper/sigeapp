@@ -3,6 +3,8 @@
 
             var curso = $('#curso').val();
             lista_turmas(curso);
+
+            
 		});
 
         function get_aluno_dados(id){

@@ -103,12 +103,12 @@ $con = $db->openConection();
 			<div class="table-responsive">
 			  <table class="table">
 				<tr  class="info">
-					<th>ID</th>
+					<th>Item</th>
 					<th>Disciplina</th>
-					<th>Creditos</th>
-					<th>Curso</th>
+					<th>Peso ou Creditos</th>
+					<th>Classe</th>
                
-					<th>Plano Curricular</th>
+					<th>Natureza</th>
 					<th><span class="pull-right">Acções</span></th>
 					
 				</tr>

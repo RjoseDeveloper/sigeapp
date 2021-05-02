@@ -82,11 +82,11 @@ FROM formando WHERE formando.fullname LIKE '$string'";
 
     function find_users($q, $ctr){
         if ($ctr ==0){
-            return "SELECT id, nomeCompleto as fullname, email FROM utilizador WHERE idprevilegio >= 1 AND nomeCompleto LIKE '%$q%' LIMIT 3";
+            return "SELECT id, fullname, email FROM utilizador WHERE idprevilegio >= 1 AND fullname LIKE '%$q%' LIMIT 3";
         }else if($ctr == 5){
-            return "SELECT id, nomeCompleto as fullname, email FROM utilizador WHERE idprevilegio < 2 AND nomeCompleto LIKE '%$q%' LIMIT 3";
+            return "SELECT id, fullname, email FROM utilizador WHERE idprevilegio < 2 AND fullname LIKE '%$q%' LIMIT 3";
         }else{
-            return "SELECT aluno.idaluno as id, CONCAT(aluno.nome,' ', aluno.apelido) as fullname, email FROM aluno WHERE CONCAT(aluno.nome,' ', aluno.apelido) LIKE '%$q%' LIMIT 3";
+            return "SELECT  id, fullname, email FROM utilizador WHERE fullname LIKE '%$q%' LIMIT 3";
         }
     }
 

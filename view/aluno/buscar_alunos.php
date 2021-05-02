@@ -66,11 +66,11 @@ if ($action == 'ajax') {
 
 
     $aColumns = array('utilizador.fullname');//Columnas de busqueda
-    $sTable = "utilizador";
+    $sTable = "utilizador,distrito";
     $sWhere = "";
     if ($_GET['q'] != "") {
 
-        $sWhere = "WHERE (";
+        $sWhere = " AND (";
         for ($i = 0; $i < count($aColumns); $i++) {
             $sWhere .= $aColumns[$i] . " LIKE '%".$q."%' OR ";
         }
@@ -92,13 +92,12 @@ if ($action == 'ajax') {
         $queries = $pessoa->get_all_pessoa(1,$user_id);
         $count_query = mysqli_query($con, "SELECT count(*) AS numrows 
             FROM utilizador WHERE utilizador.id=".$user_id);
-        //echo  $queries;
+        
        
     }else{
         $queries = $pessoa->get_all_pessoa(0,0)." $sWhere LIMIT $offset,$per_page";
         $count_query = mysqli_query($con, "SELECT count(*) AS numrows FROM $sTable $sWhere");
     }
-
 
     $row = mysqli_fetch_assoc($count_query);
     $numrows = $row['numrows'];
@@ -175,7 +174,7 @@ if ($action == 'ajax') {
                                      <i class="glyphicon glyphicon-list"></i>
                                  </a>
 
-                                 <?php if ($_SESSION['tipo'] != 'estudante'){?>
+                                 <?php if ($_SESSION['tipo'] != 'aluno'){?>
 
 					<a href="#" class='btn btn-default' title='Editar Aluno'
                        onclick="get_aluno_dados('<?php echo $id_aluno;?>');"><i class="glyphicon glyphicon-edit"></i></a>

@@ -23,16 +23,7 @@
                         <label class="control-label col-sm-4" for="actividade">Detalhes: </label>
                         <div class="col-sm-8">
 
-
-                            <select class="form-control input-sm" id="actividade" name="actividade">
-                                <?php
-                                $sql_vendedor=mysqli_query($con,"select * from pay_finality");
-                                while ($rw=mysqli_fetch_array($sql_vendedor)){?>
-                                    <option value="<?php echo $rw['finalidade'] ?>"><?php echo $rw["finalidade"]?></option>
-                                <?php }?>
-                            </select>
-
-<!--                    <input type="text" name="actividade" id="actividade" value="" class="form-control">-->
+                 <input type="text" name="actividade" id="actividade" value="" class="form-control">
 
 
                         </div>

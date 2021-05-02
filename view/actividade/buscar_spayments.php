@@ -113,8 +113,8 @@ INNER JOIN utilizador ON actividade.idutilizador = utilizador.id';
 				    $i++;
 
 						$_id=$row['idactividade'];
-						$details= utf8_encode($row['descricao']);
-						$curso=$row['details'];
+						$details= $row['details'];
+						$curso=utf8_encode($row['descricao']);
 						$di=$row['data_inicio'];
                         $df=$row['data_fim'];
                         $user=$row['fullname'];

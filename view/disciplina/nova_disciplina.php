@@ -26,12 +26,11 @@ if (empty($_POST['descricao'])){
     $credito = mysqli_real_escape_string($con,(strip_tags($_POST["credito"],ENT_QUOTES)));
     $codigo = rand(2018,2019) ; //mysqli_real_escape_string($con,(strip_tags($_POST["codigo"],ENT_QUOTES)));
     $date_added=date("Y-m-d");
-    $ano = $_POST['ano'];
     $natureza = $_POST['natureza'];
     $curso = $_POST['curso'];
 
     // check if user or email address already exists
-    $sql = "SELECT * FROM disciplina WHERE idcurso = '$curso' AND anolectivo = '$ano' AND descricao = '$descricao'";
+    $sql = "SELECT * FROM disciplina WHERE idcurso = '$curso' AND descricao = '$descricao'";
     $query_check_user_name = mysqli_query($con,$sql);
     $query_check_user=mysqli_num_rows($query_check_user_name);
 
@@ -39,9 +38,9 @@ if (empty($_POST['descricao'])){
         $errors[] = "Para o curso seleccionado a disciplina ja foi registada  ";
     } else {
         // write new user's data into database
-        $sql = "INSERT INTO disciplina(creditos,descricao,codigo,data_registo,natureza,anolectivo,idcurso)
+        $sql = "INSERT INTO disciplina(creditos,descricao,codigo,data_registo,natureza,idcurso)
                             VALUES('".$credito."','".$descricao."','".$codigo."','" . $date_added. "',
-                            '" .$natureza. "','".$ano."','".$curso."')";
+                            '" .$natureza. "','".$curso."')";
 
         $query_new_user_insert = mysqli_query($con,$sql);
        

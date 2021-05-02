@@ -14,7 +14,7 @@ class UtilizadorSQL {
     }
 
     public function list_utilizador(){
-    return 'DISTINCT(utilizador.id), utilizador.username, utilizador.fullname,previlegio.idprevilegio,utilizador.celular1,
+    return 'DISTINCT(utilizador.id), utilizador.username, utilizador.password, utilizador.fullname,previlegio.idprevilegio,utilizador.celular1,
                 utilizador.email, utilizador.sexo, previlegio.descricao,utilizador.data_added, utilizador.estadocivil
                 FROM utilizador inner join  previlegio on utilizador.idprevilegio = previlegio.idprevilegio';
 }
