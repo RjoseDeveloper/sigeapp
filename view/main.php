@@ -35,8 +35,6 @@ if (!isset($_SESSION['username'])){ ?>
         <?php require '../view/layouts/_header.html' ?>
 
         <script src="fragments/js/js_function.js" type="text/javascript"></script>
-        <script src="fragments/js/js_estudante.js" type="text/javascript"></script>
-        <script src="fragments/js/js_plano_avaliacao.js" type="text/javascript"></script>
         <script src="fragments/js/js_registo_academico.js" type="text/javascript"></script>
         <script type="text/javascript" src="fragments/js/shared.js"></script>
 

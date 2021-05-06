@@ -8,9 +8,9 @@ $row_array = array();
 /* If connection to database, run sql statement. */
 if ($con)
 {
-	$sql ="SELECT * from utilizador";
+	$sql ="";
 
-	$fetch = mysqli_query($con,"where utilizador.fullname like '%" . mysqli_real_escape_string($con,($_GET['term'])) . "%' LIMIT 0 ,3");
+	$fetch = mysqli_query($con,"SELECT * from utilizador where utilizador.fullname like '%" . mysqli_real_escape_string($con,($_GET['term'])) . "%' LIMIT 0 ,3");
 
 	/* Retrieve and store in array the results of the query.*/
 	while ($row = mysqli_fetch_array($fetch)) {

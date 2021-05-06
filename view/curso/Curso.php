@@ -36,9 +36,6 @@ $idDoc = $query->getDoc_id($_SESSION['username']);
     <script src="../../bibliotecas/bootstrap/js/bootstrap-select.js"></script>
 
     <script  src="../fragments/js/js_function.js" type="text/javascript"></script>
-    <script src="../fragments/js/js_data_base.js" type="text/javascript" charset="utf-8"> </script>
-    <script src="../fragments/js/js_docente.js" type="text/javascript"></script>
-    <script src="../fragments/js/js_data_base.js" type="text/javascript"> </script>
     <script type="text/javascript" src="../fragments/js/js_registo_academico.js"></script>
 
     <style type="text/css">

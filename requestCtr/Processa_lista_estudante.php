@@ -118,73 +118,27 @@ echo $query->queryAutoComplete($filter,$cursos, $disp);
 
 case 6:
 
-    $item = $_REQUEST['idpauta'];
-    $q = 'select pautanormal.idcurso, pautanormal.idDisciplina from pautanormal WHERE pautanormal.idPautaNormal ='.$item;
-    $data = mysqli_query($db->openConection(), $q);
+if (isset($_GET['term'])){
 
-    if ($rw = mysqli_fetch_assoc($data)) {
-        $query = $sql_estudante->obterEstudantesDisciplina($rw['idDisciplina'],$rw['idcurso']);
-        $result = mysqli_query($db->openConection(), $query);
+  $row_array = array();
+  $fetch = mysqli_query($con,"SELECT * from utilizador where utilizador.fullname like '%" . mysqli_real_escape_string($con,($_GET['term'])) . "%' LIMIT 0 ,3");
 
-        echo '<div class="form-horizontal">
-				<div class="form-group row"> <div class="col-xs-7">';
-        echo '<select id="aluno_edit_nota" name="aluno_edit_nota" onchange="buscar_notas(this.value)" class="form-control">';
-        echo '<option>Seleccionar um aluno</option>';
+  while ($row = mysqli_fetch_array($fetch)) {
 
-        while ($row = mysqli_fetch_assoc($result)) {
-            echo '<option value="'.$row['idEstudante'].'" >' . $row['nomeCompleto'] . '</option>';
-        }
-    }
-   echo '</select></div> <div class="col-md-4">';
-    echo'<button type="button" class="btn btn-default" value="'.$item.'" onclick="list_pauta(this.value)">Todos Alunos</button></div></div></div></div>';
+    $row_array['value'] = $row['username'];
+    $row_array['id_aluno']=$row['id'];
+    $row_array['nomeCompleto']=$row['fullname'];
+    $row_array['celular']=$row['celular1'];
+    $row_array['email']=$row['email'];
+   
+    echo json_encode($row_array);
+  
+}
 
     break;
 
             case 7:
-                    $idpauta = $_REQUEST['idpauta'];
-
-                    if ($_REQUEST['ctr']== 0) {
-                        $var = $sql_estudante->get_estudante_nota($idpauta, '', 0);
-                    }else{
-
-                        $idaluno = $_REQUEST['idaluno'];
-                        $var = $sql_estudante->get_estudante_nota($idpauta, $idaluno,1);
-                    }
-
-                    if (isset($idpauta) && $idpauta !=0){
-
-                        $result = mysqli_query($db->openConection(),$var);
-                        $t = 0;
-
-                        while ($row = mysqli_fetch_assoc($result)) {
-
-                            if ($t % 2 != 0) { echo '<tr class="remove_tr" style="background: #E8E8E8">';
-                            } else {echo '<tr class="remove_tr" style="background: #FFFAFA">';}
-
-                            echo '<td>&nbsp;</td><td class="nrmec">' . $row['numero'] . '</td> <td>&nbsp;</td>';
-                            echo '<td>' . $row['nomeCompleto'] . '</td>';
-                            echo '<td><div style="text-align: right; float: right" class="">';
-                            echo '<input type="number" id="nota" value="' . $row['nota'] . '" class="form-control nota" onchange="validar_nota(this.value)" placeholder=""/></div>';
-                            echo '<input id="id_aluno" value="' . $row['idEstudante'] . '" name="id_aluno" type="hidden" /></td>';
-                            echo '<td class="nrmec"><input type="hidden" id="btn_nrmec" value="' . $row['numero'] . '"/> </td>';
-                            echo '<td class="nrmec"><button class="btn btn-default" 
-                                    onclick="editar_nota(this.value, '.$row['nota'].')" type="button" id="btn_nrmec" value="' . $row['idNota'] . '">
-                                    <span class="glyphicon glyphicon-edit"></span></button> 
-                                    
-                                    <button class="btn btn-default" 
-                                    onclick="excluir_nota(this.value)" type="button" id="btn_nrmec" value="' . $row['idNota'] . '">
-                                    <span class="glyphicon glyphicon-trash"></span></button>
-                                    
-                                    
-                                    </td>
-                                    
-                                    
-                                    </tr>';
-
-                            $t++;
-                        }
-
-                    }
+                  
 
                 break;
 		}

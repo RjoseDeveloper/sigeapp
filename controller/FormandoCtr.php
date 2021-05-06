@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Raimundo Jose
+ * User: User
  * Date: 1/14/2018
  * Time: 11:59 PM
  */
@@ -325,11 +325,6 @@ if ($_REQUEST['ctr'] != 0) {
 
         }
         echo json_encode($vector);
-        break;
-
-    case 12:
-
-
         break;
 
     case 13:

@@ -19,6 +19,8 @@ $con = $db->openConection();
 <html lang="en">
   <head>
     <?php include("../layouts/head.php");?>
+    <script type="text/javascript" src="./bibliotecas/jQuery/js/jquery-1.11.2.min.js"></script>
+   
   </head>
   <body>
 
@@ -197,12 +199,12 @@ $con = $db->openConection();
 
         function _autocomplete(val){
             var html ="";
-            if (val.length >2) {
+            if (val.length >0) {
 
                 $('#dados_auto').show();
 
                 $.ajax({
-                    url: "../ajax/alunos.php",
+                    url: "requestCtr/Processa_lista_estudante.php",
                     data: {term: val},
                     dataType: 'json',
                     success: function (data) {

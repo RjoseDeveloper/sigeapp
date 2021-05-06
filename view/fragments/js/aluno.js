@@ -162,9 +162,11 @@
                 }); // fim primeiro ajax
             }
         }
+
         /****
          * Funcao aplicado ao evento onClick na listview
          */
+
         function get_formando_ID(item){
 
             $('.list_view_frm').hide();
@@ -179,7 +181,6 @@
                     $('.sms_report').html(data);
                 }
             });
-
         }
 
         function get_formando_data(item){
@@ -196,6 +197,7 @@
                 }
             });
         }
+        
         /***
          * Funcao que permite obter lista de peridos passados o curso por parametro
          */
