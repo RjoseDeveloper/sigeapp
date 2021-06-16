@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
--- Anfitrião:                    localhost
--- Versão do servidor:           5.7.24 - MySQL Community Server (GPL)
+-- Host:                         127.0.0.1
+-- Server version:               5.7.33 - MySQL Community Server (GPL)
 -- Server OS:                    Win64
--- HeidiSQL Versão:              10.2.0.5599
+-- HeidiSQL Version:             11.2.0.6213
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -10,13 +10,16 @@
 /*!50503 SET NAMES utf8mb4 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
 -- Dumping database structure for sigairis
+DROP DATABASE IF EXISTS `sigairis`;
 CREATE DATABASE IF NOT EXISTS `sigairis` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `sigairis`;
 
 -- Dumping structure for table sigairis.actividade
+DROP TABLE IF EXISTS `actividade`;
 CREATE TABLE IF NOT EXISTS `actividade` (
   `idactividade` int(11) NOT NULL AUTO_INCREMENT,
   `descricao` varchar(255) DEFAULT NULL,
@@ -32,9 +35,15 @@ CREATE TABLE IF NOT EXISTS `actividade` (
   CONSTRAINT `actividade_ibfk_2` FOREIGN KEY (`idcurso`) REFERENCES `curso` (`idcurso`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
+-- Dumping data for table sigairis.actividade: ~0 rows (approximately)
+DELETE FROM `actividade`;
+/*!40000 ALTER TABLE `actividade` DISABLE KEYS */;
+INSERT INTO `actividade` (`idactividade`, `descricao`, `data_inicio`, `data_fim`, `idutilizador`, `idcurso`, `data_added`) VALUES
+	(1, 'Matriculas', '2021-06-16', '2021-07-16', 1, 1, '2021-06-16');
+/*!40000 ALTER TABLE `actividade` ENABLE KEYS */;
 
 -- Dumping structure for table sigairis.curso
+DROP TABLE IF EXISTS `curso`;
 CREATE TABLE IF NOT EXISTS `curso` (
   `descricao` varchar(255) NOT NULL,
   `codigo` varchar(255) DEFAULT NULL,
@@ -50,11 +59,17 @@ CREATE TABLE IF NOT EXISTS `curso` (
   KEY `coordenador` (`coordenador`),
   CONSTRAINT `curso_ibfk_3` FOREIGN KEY (`idperiodo`) REFERENCES `periodo` (`idperiodo`),
   CONSTRAINT `curso_ibfk_4` FOREIGN KEY (`coordenador`) REFERENCES `utilizador` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
+-- Dumping data for table sigairis.curso: ~0 rows (approximately)
+DELETE FROM `curso`;
+/*!40000 ALTER TABLE `curso` DISABLE KEYS */;
+INSERT INTO `curso` (`descricao`, `codigo`, `data_registo`, `idcurso`, `qtd_turmas`, `taxa_matricula`, `idperiodo`, `coordenador`, `details`) VALUES
+	('8Âª Classe', '2018', '2021-06-16', 1, 5, 700, 1, 1, '8Âª Classe');
+/*!40000 ALTER TABLE `curso` ENABLE KEYS */;
 
 -- Dumping structure for table sigairis.despesa
+DROP TABLE IF EXISTS `despesa`;
 CREATE TABLE IF NOT EXISTS `despesa` (
   `iddespesa` int(11) NOT NULL AUTO_INCREMENT,
   `details` varchar(255) DEFAULT NULL,
@@ -67,11 +82,15 @@ CREATE TABLE IF NOT EXISTS `despesa` (
   KEY `idutilizador` (`idutilizador`),
   CONSTRAINT `despesa_ibfk_1` FOREIGN KEY (`idorcamento`) REFERENCES `orcamento` (`idorcamneto`),
   CONSTRAINT `despesa_ibfk_2` FOREIGN KEY (`idutilizador`) REFERENCES `utilizador` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
+-- Dumping data for table sigairis.despesa: ~0 rows (approximately)
+DELETE FROM `despesa`;
+/*!40000 ALTER TABLE `despesa` DISABLE KEYS */;
+/*!40000 ALTER TABLE `despesa` ENABLE KEYS */;
 
 -- Dumping structure for table sigairis.disciplina
+DROP TABLE IF EXISTS `disciplina`;
 CREATE TABLE IF NOT EXISTS `disciplina` (
   `idDisciplina` int(11) NOT NULL AUTO_INCREMENT,
   `creditos` int(11) NOT NULL,
@@ -87,11 +106,17 @@ CREATE TABLE IF NOT EXISTS `disciplina` (
   KEY `idcurso` (`idcurso`),
   CONSTRAINT `disciplina_ibfk_1` FOREIGN KEY (`anolectivo`) REFERENCES `anolectivo` (`idano`),
   CONSTRAINT `disciplina_ibfk_3` FOREIGN KEY (`idcurso`) REFERENCES `curso` (`idcurso`)
-) ENGINE=InnoDB AUTO_INCREMENT=481 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
+-- Dumping data for table sigairis.disciplina: ~0 rows (approximately)
+DELETE FROM `disciplina`;
+/*!40000 ALTER TABLE `disciplina` DISABLE KEYS */;
+INSERT INTO `disciplina` (`idDisciplina`, `creditos`, `descricao`, `codigo`, `data_registo`, `natureza`, `anolectivo`, `idcurso`) VALUES
+	(1, 20, 'Matematica', 2019, '2021-06-16', 'Teorico/Pratico', NULL, 1);
+/*!40000 ALTER TABLE `disciplina` ENABLE KEYS */;
 
 -- Dumping structure for table sigairis.distrito
+DROP TABLE IF EXISTS `distrito`;
 CREATE TABLE IF NOT EXISTS `distrito` (
   `iddistrito` int(11) NOT NULL AUTO_INCREMENT,
   `descricao` varchar(255) NOT NULL,
@@ -99,11 +124,18 @@ CREATE TABLE IF NOT EXISTS `distrito` (
   PRIMARY KEY (`iddistrito`),
   KEY `idprovincia` (`idprovincia`),
   CONSTRAINT `distrito_ibfk_1` FOREIGN KEY (`idprovincia`) REFERENCES `provincia` (`idprovincia`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
+-- Dumping data for table sigairis.distrito: ~2 rows (approximately)
+DELETE FROM `distrito`;
+/*!40000 ALTER TABLE `distrito` DISABLE KEYS */;
+INSERT INTO `distrito` (`iddistrito`, `descricao`, `idprovincia`) VALUES
+	(1, 'Balama', 1),
+	(2, 'Namialo', 2);
+/*!40000 ALTER TABLE `distrito` ENABLE KEYS */;
 
 -- Dumping structure for table sigairis.encarregado
+DROP TABLE IF EXISTS `encarregado`;
 CREATE TABLE IF NOT EXISTS `encarregado` (
   `idencarregado` int(111) NOT NULL AUTO_INCREMENT,
   `localtrablho` varchar(50) DEFAULT NULL,
@@ -116,9 +148,13 @@ CREATE TABLE IF NOT EXISTS `encarregado` (
   PRIMARY KEY (`idencarregado`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
+-- Dumping data for table sigairis.encarregado: ~0 rows (approximately)
+DELETE FROM `encarregado`;
+/*!40000 ALTER TABLE `encarregado` DISABLE KEYS */;
+/*!40000 ALTER TABLE `encarregado` ENABLE KEYS */;
 
 -- Dumping structure for table sigairis.inscricao
+DROP TABLE IF EXISTS `inscricao`;
 CREATE TABLE IF NOT EXISTS `inscricao` (
   `idinscricao` int(11) NOT NULL AUTO_INCREMENT,
   `idturma` int(11) NOT NULL,
@@ -138,18 +174,30 @@ CREATE TABLE IF NOT EXISTS `inscricao` (
   CONSTRAINT `inscricao_ibfk_7` FOREIGN KEY (`idturno`) REFERENCES `turno` (`idturno`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
+-- Dumping data for table sigairis.inscricao: ~0 rows (approximately)
+DELETE FROM `inscricao`;
+/*!40000 ALTER TABLE `inscricao` DISABLE KEYS */;
+/*!40000 ALTER TABLE `inscricao` ENABLE KEYS */;
 
 -- Dumping structure for table sigairis.juro
+DROP TABLE IF EXISTS `juro`;
 CREATE TABLE IF NOT EXISTS `juro` (
   `idjuro` int(11) NOT NULL AUTO_INCREMENT,
   `juro` double DEFAULT NULL,
   PRIMARY KEY (`idjuro`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
+-- Dumping data for table sigairis.juro: ~0 rows (approximately)
+DELETE FROM `juro`;
+/*!40000 ALTER TABLE `juro` DISABLE KEYS */;
+INSERT INTO `juro` (`idjuro`, `juro`) VALUES
+	(1, 0),
+	(2, 10),
+	(3, 30);
+/*!40000 ALTER TABLE `juro` ENABLE KEYS */;
 
 -- Dumping structure for table sigairis.notafinal
+DROP TABLE IF EXISTS `notafinal`;
 CREATE TABLE IF NOT EXISTS `notafinal` (
   `idpautafrequencia` int(11) NOT NULL AUTO_INCREMENT,
   `iddisciplina` int(11) DEFAULT NULL,
@@ -169,15 +217,19 @@ CREATE TABLE IF NOT EXISTS `notafinal` (
   CONSTRAINT `notafinal_ibfk_3` FOREIGN KEY (`idaluno`) REFERENCES `aluno` (`idaluno`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
+-- Dumping data for table sigairis.notafinal: ~0 rows (approximately)
+DELETE FROM `notafinal`;
+/*!40000 ALTER TABLE `notafinal` DISABLE KEYS */;
+/*!40000 ALTER TABLE `notafinal` ENABLE KEYS */;
 
 -- Dumping structure for table sigairis.perfil
+DROP TABLE IF EXISTS `perfil`;
 CREATE TABLE IF NOT EXISTS `perfil` (
   `idperfil` int(11) NOT NULL AUTO_INCREMENT,
   `diretor` varchar(255) DEFAULT NULL,
   `nome_instituicao` varchar(255) DEFAULT NULL,
   `data_registo` date DEFAULT NULL,
-  `idendereco` int(11) DEFAULT NULL,
+  `idendereco` varchar(200) DEFAULT NULL,
   `nome2instituicao` varchar(255) DEFAULT NULL,
   `contacto` varchar(255) DEFAULT NULL,
   `codigopostal` varchar(255) DEFAULT NULL,
@@ -188,23 +240,34 @@ CREATE TABLE IF NOT EXISTS `perfil` (
   `cidade` varchar(255) DEFAULT NULL,
   `nuit` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`idperfil`),
-  KEY `idutilizador_resp` (`diretor`),
-  KEY `idendereco` (`idendereco`),
-  CONSTRAINT `perfil_ibfk_2` FOREIGN KEY (`idendereco`) REFERENCES `endereco` (`idendereco`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+  KEY `idutilizador_resp` (`diretor`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
+-- Dumping data for table sigairis.perfil: ~0 rows (approximately)
+DELETE FROM `perfil`;
+/*!40000 ALTER TABLE `perfil` DISABLE KEYS */;
+INSERT INTO `perfil` (`idperfil`, `diretor`, `nome_instituicao`, `data_registo`, `idendereco`, `nome2instituicao`, `contacto`, `codigopostal`, `email`, `dirpedagogico`, `logo_url`, `provincia`, `cidade`, `nuit`) VALUES
+	(2, 'Claudio Duarte', 'Arco Iris', '2021-06-16', 'Natite', 'Escola Comunhao ', '8839992', '3200', NULL, NULL, NULL, NULL, NULL, NULL);
+/*!40000 ALTER TABLE `perfil` ENABLE KEYS */;
 
 -- Dumping structure for table sigairis.periodo
+DROP TABLE IF EXISTS `periodo`;
 CREATE TABLE IF NOT EXISTS `periodo` (
   `idperiodo` int(11) NOT NULL AUTO_INCREMENT,
   `descricao` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`idperiodo`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
+-- Dumping data for table sigairis.periodo: ~0 rows (approximately)
+DELETE FROM `periodo`;
+/*!40000 ALTER TABLE `periodo` DISABLE KEYS */;
+INSERT INTO `periodo` (`idperiodo`, `descricao`) VALUES
+	(1, 'Laboral'),
+	(2, 'Pos Laboral');
+/*!40000 ALTER TABLE `periodo` ENABLE KEYS */;
 
 -- Dumping structure for table sigairis.prestacao
+DROP TABLE IF EXISTS `prestacao`;
 CREATE TABLE IF NOT EXISTS `prestacao` (
   `valor` double DEFAULT NULL,
   `datapay` date DEFAULT NULL,
@@ -230,38 +293,61 @@ CREATE TABLE IF NOT EXISTS `prestacao` (
   CONSTRAINT `prestacao_ibfk_8` FOREIGN KEY (`status`) REFERENCES `status` (`idstatus`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
+-- Dumping data for table sigairis.prestacao: ~0 rows (approximately)
+DELETE FROM `prestacao`;
+/*!40000 ALTER TABLE `prestacao` DISABLE KEYS */;
+/*!40000 ALTER TABLE `prestacao` ENABLE KEYS */;
 
 -- Dumping structure for table sigairis.previlegio
+DROP TABLE IF EXISTS `previlegio`;
 CREATE TABLE IF NOT EXISTS `previlegio` (
   `idprevilegio` int(11) NOT NULL AUTO_INCREMENT,
   `descricao` varchar(255) DEFAULT NULL,
   `tipo` varchar(255) NOT NULL,
   PRIMARY KEY (`idprevilegio`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
+-- Dumping data for table sigairis.previlegio: ~3 rows (approximately)
+DELETE FROM `previlegio`;
+/*!40000 ALTER TABLE `previlegio` DISABLE KEYS */;
+INSERT INTO `previlegio` (`idprevilegio`, `descricao`, `tipo`) VALUES
+	(1, 'Aluno', 'aluno'),
+	(2, 'Registo Academico', 'racademico'),
+	(3, 'Direccao', 'direcao');
+/*!40000 ALTER TABLE `previlegio` ENABLE KEYS */;
 
 -- Dumping structure for table sigairis.provincia
+DROP TABLE IF EXISTS `provincia`;
 CREATE TABLE IF NOT EXISTS `provincia` (
   `idprovincia` int(11) NOT NULL AUTO_INCREMENT,
   `descricao` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`idprovincia`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
+-- Dumping data for table sigairis.provincia: ~2 rows (approximately)
+DELETE FROM `provincia`;
+/*!40000 ALTER TABLE `provincia` DISABLE KEYS */;
+INSERT INTO `provincia` (`idprovincia`, `descricao`) VALUES
+	(1, 'C. Delgado'),
+	(2, 'Nampula');
+/*!40000 ALTER TABLE `provincia` ENABLE KEYS */;
 
 -- Dumping structure for table sigairis.status
+DROP TABLE IF EXISTS `status`;
 CREATE TABLE IF NOT EXISTS `status` (
   `idstatus` int(11) NOT NULL AUTO_INCREMENT,
   `value` int(11) NOT NULL,
   `descricao` varchar(255) NOT NULL,
   PRIMARY KEY (`idstatus`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
+-- Dumping data for table sigairis.status: ~0 rows (approximately)
+DELETE FROM `status`;
+/*!40000 ALTER TABLE `status` DISABLE KEYS */;
+/*!40000 ALTER TABLE `status` ENABLE KEYS */;
 
 -- Dumping structure for table sigairis.turma
+DROP TABLE IF EXISTS `turma`;
 CREATE TABLE IF NOT EXISTS `turma` (
   `idturma` int(11) NOT NULL AUTO_INCREMENT,
   `descricao` varchar(255) NOT NULL,
@@ -269,20 +355,34 @@ CREATE TABLE IF NOT EXISTS `turma` (
   PRIMARY KEY (`idturma`),
   KEY `idcurso` (`idcurso`),
   CONSTRAINT `turma_ibfk_1` FOREIGN KEY (`idcurso`) REFERENCES `curso` (`idcurso`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
+-- Dumping data for table sigairis.turma: ~0 rows (approximately)
+DELETE FROM `turma`;
+/*!40000 ALTER TABLE `turma` DISABLE KEYS */;
+INSERT INTO `turma` (`idturma`, `descricao`, `idcurso`) VALUES
+	(1, 'Turma [1]', 1),
+	(2, 'Turma [2]', 1),
+	(3, 'Turma [3]', 1),
+	(4, 'Turma [4]', 1),
+	(5, 'Turma [5]', 1);
+/*!40000 ALTER TABLE `turma` ENABLE KEYS */;
 
 -- Dumping structure for table sigairis.turno
+DROP TABLE IF EXISTS `turno`;
 CREATE TABLE IF NOT EXISTS `turno` (
   `idturno` int(11) NOT NULL AUTO_INCREMENT,
   `descricao` varchar(255) NOT NULL,
   PRIMARY KEY (`idturno`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
+-- Dumping data for table sigairis.turno: ~0 rows (approximately)
+DELETE FROM `turno`;
+/*!40000 ALTER TABLE `turno` DISABLE KEYS */;
+/*!40000 ALTER TABLE `turno` ENABLE KEYS */;
 
 -- Dumping structure for table sigairis.utilizador
+DROP TABLE IF EXISTS `utilizador`;
 CREATE TABLE IF NOT EXISTS `utilizador` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `codigo` varchar(255) DEFAULT NULL,
@@ -307,10 +407,16 @@ CREATE TABLE IF NOT EXISTS `utilizador` (
   KEY `FK_utilizador_distrito` (`iddistrito`),
   CONSTRAINT `FK_utilizador_distrito` FOREIGN KEY (`iddistrito`) REFERENCES `distrito` (`iddistrito`),
   CONSTRAINT `utilizador_ibfk_2` FOREIGN KEY (`idprevilegio`) REFERENCES `previlegio` (`idprevilegio`)
-) ENGINE=InnoDB AUTO_INCREMENT=127 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Data exporting was unselected.
+-- Dumping data for table sigairis.utilizador: ~1 rows (approximately)
+DELETE FROM `utilizador`;
+/*!40000 ALTER TABLE `utilizador` DISABLE KEYS */;
+INSERT INTO `utilizador` (`id`, `codigo`, `fullname`, `sexo`, `username`, `password`, `documento`, `datanasc`, `nivelescolar`, `idprevilegio`, `iddistrito`, `estadocivil`, `email`, `celular1`, `celular2`, `endereco1`, `endereco2`, `data_added`) VALUES
+	(1, '9762021', 'Caudencio da Silva Fernando', 'M', 'csilva', '123456', '018800291892', '2021-06-16', 1, 2, 1, 1, 'csilva@gmail.com', '8490018289', '92839200', 'Natite', 'Natite', '2021-06-16');
+/*!40000 ALTER TABLE `utilizador` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
