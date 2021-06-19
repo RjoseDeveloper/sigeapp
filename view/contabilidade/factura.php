@@ -37,7 +37,7 @@ if (empty($_POST['id_aluno'])){
     // escaping, additionally removing everything that could be (html/javascript-) code
     $idaluno = mysqli_real_escape_string($con,(strip_tags($_POST["id_aluno"],ENT_QUOTES)));
     $curso = mysqli_real_escape_string($con,(strip_tags($_POST["curso"],ENT_QUOTES)));
-    $finality = mysqli_real_escape_string($con,(strip_tags($_POST["finality"],ENT_QUOTES)));
+    $actividade = mysqli_real_escape_string($con,(strip_tags($_POST["finality"],ENT_QUOTES)));
     $juro = mysqli_real_escape_string($con,(strip_tags($_POST["juro"],ENT_QUOTES)));
     $valor = mysqli_real_escape_string($con,(strip_tags($_POST["valor"],ENT_QUOTES)));
     $modopay = mysqli_real_escape_string($con,(strip_tags($_POST["modo_pay"],ENT_QUOTES)));
@@ -56,12 +56,12 @@ if (empty($_POST['id_aluno'])){
     } else {
 //        // write new user's data into database
         $taxa_juro = ($_POST["juro"]*$_POST["valor"])/100+ $_POST["valor"];
-        $sql1 = "INSERT INTO prestacao(valor, datapay, idjuro, status, modepay, idfinalidade,
-                                        idcurso, idaluno, user_session_id)
+        $sql1 = "INSERT INTO prestacao(valor, datapay, idjuro, status, modepay, idactividade,
+                                        idcurso, iduser, user_session_id)
                             VALUES('".$taxa_juro."','".$date_added."','" . $juro . "','" .$status. "',
-                            '" .$modopay. "','" .$finality. "','" . $curso . "','" . $idaluno . "','" . $id . "')";
+                            '" .$modopay. "','" .$actividade. "','" . $curso . "','" . $idaluno . "','" . $id . "')";
 
-        //echo $sql1;
+      // echo $sql1;
         $query_new_user_insert = mysqli_query($con,$sql1);
          ///if user has been added successfully
         if ($query_new_user_insert) {

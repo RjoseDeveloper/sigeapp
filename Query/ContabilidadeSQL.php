@@ -23,29 +23,32 @@ class ContabilidadeSQL
         return $sql;
     }
 
-    public function all_paymantes($_ctr)
+    function somar_pagamento(){
+        return ('SELECT SUM(prestacao.valor) as valor, prestacao.`status`, prestacao.user_session_id,  
+                utilizador.id, utilizador.codigo, utilizador.fullname, utilizador.celular1 as celular, 
+                utilizador.email
+		
+                FROM prestacao, utilizador, actividade
+                WHERE utilizador.id = prestacao.iduser
+        
+                GROUP BY utilizador.fullname, prestacao.`status`,  prestacao.user_session_id, utilizador.id');
+    }
+
+    public function all_paymantes($ctr, $idaluno)
     {
-        $sql = 'SELECT';
-        if($_ctr == -1){
-            $sql.= ' SUM(prestacao.valor) as valor,';
-        }else{
-            $sql.= ' prestacao.valor,';
+       $sql ='SELECT DISTINCT utilizador.id, prestacao.valor, prestacao.datapay, 
+                prestacao.modepay, juro.juro, actividade.descricao, actividade.taxa,
+                      utilizador.fullname, 
+                utilizador.celular1 as celular,prestacao.status,
+                   utilizador.email, utilizador.id, utilizador.codigo
+                FROM prestacao INNER JOIN juro ON juro.idjuro = prestacao.idjuro
+                                INNER JOIN actividade on actividade.idactividade = prestacao.idactividade
+                                INNER JOIN utilizador ON utilizador.id = prestacao.iduser';
+
+        if ($ctr != 'all'){
+            $sql.= ' where utilizador.id='.$idaluno;
         }
 
-      $sql.= 'prestacao.datapay, prestacao.modepay, juro.juro,
-  pay_finality.finalidade,CONCAT(aluno.nome," ",aluno.apelido) as nomeCompleto, utilizador.celular,prestacao.status,
-   utilizador.email, aluno.idaluno, aluno.nr_mec, pay_finality.idfinalidade
-FROM prestacao INNER JOIN juro
-    ON juro.idjuro = prestacao.idjuro INNER JOIN pay_finality
-    ON pay_finality.idfinalidade = prestacao.idfinalidade
-INNER JOIN utilizador ON utilizador.id = prestacao.user_session_id
-INNER JOIN aluno ON aluno.idaluno = prestacao.idaluno';
-
-        if ($_ctr != -1) {
-            $sql .= ' WHERE aluno.idaluno =' . $_ctr;
-        } else {
-            $sql .= ' GROUP BY aluno.idaluno';
-        }
         return $sql;
     }
 

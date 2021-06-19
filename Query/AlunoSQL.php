@@ -11,7 +11,13 @@ class AlunoSQL {
 
     function get_all_pessoa($ctr, $iduser){
 
-        $sql ='SELECT DISTINCT * from utilizador INNER JOIN distrito ON distrito.iddistrito = utilizador.iddistrito WHERE utilizador.idprevilegio = 1' ;
+        $sql ='SELECT DISTINCT utilizador.id, utilizador.codigo,utilizador. fullname, utilizador.endereco1, utilizador.sexo,
+curso.descricao AS curso, utilizador.data_added, utilizador.iddistrito , distrito.descricao
+
+FROM utilizador INNER JOIN distrito 
+    ON distrito.iddistrito = utilizador.iddistrito inner join curso
+on curso.idcurso = utilizador.idcurso
+WHERE utilizador.idprevilegio = 1' ;
 
         if ($ctr != 0){$sql.=" AND utilizador.id ='$iduser' OR utilizador.username='$iduser'"; }
         return $sql;

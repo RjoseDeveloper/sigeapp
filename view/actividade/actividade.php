@@ -33,6 +33,7 @@ if (empty($_POST['actividade'])){
     $curso = mysqli_real_escape_string($con,(strip_tags($_POST["curso"],ENT_QUOTES)));
     $di = mysqli_real_escape_string($con,(strip_tags($_POST["datainicio"],ENT_QUOTES)));
     $df = mysqli_real_escape_string($con,(strip_tags($_POST["datafim"],ENT_QUOTES)));
+    $tx = mysqli_real_escape_string($con,(strip_tags($_POST["taxa"],ENT_QUOTES)));
     $date_added=date("Y-m-d");
 
     // check if user or email address already exists
@@ -44,8 +45,9 @@ if (empty($_POST['actividade'])){
         $errors[] = "O sessao ja foi registada.";
     } else {
         // write new user's data into database
-        $sql1 = "INSERT INTO actividade (descricao, data_inicio, data_fim, idutilizador, idcurso, data_added)
-                            VALUES('".$descricao."','".$di."','" . $df . "','" .$id. "','" .$curso. "','" . $date_added . "')";
+        $sql1 = "INSERT INTO actividade (descricao, data_inicio, data_fim, idutilizador, idcurso, data_added, taxa)
+                            VALUES('".$descricao."','".$di."','" . $df . "','" .$id. "','" .$curso. "',
+                            '" . $date_added . "','" .$tx. "')";
 
         $query_new_user_insert = mysqli_query($con,$sql1);
         //echo $sql1;

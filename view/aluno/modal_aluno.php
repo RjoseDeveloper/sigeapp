@@ -219,9 +219,19 @@
 
                            <div class="form-group">
 
-                                <label  for="nrmec" class="control-label">Endereco2:</label>
-                                <input style=" color: #0000CC" type="text" class="form-control" id="endereco2" name="endereco2" placeholder="Morada, bairro">
-                             
+                                <label  for="nrmec" class="control-label">Classe:</label>
+                               <input style=" color: #0000CC" type="hidden" class="form-control" id="endereco2" name="endereco2" placeholder="Morada, bairro">
+
+                               <select class="form-control" id="classe" name="classe"  required>
+                                   <option value="#">--Select Classe--</option>
+                                   <?php
+                                   $sql2= mysqli_query($con, 'select * from curso ');
+                                   while ($row = mysqli_fetch_assoc($sql2)){?>
+                                       <option value="<?php echo $row['idcurso'] ?>">
+                                           <?php echo utf8_encode($row['descricao']) ?></option>
+                                   <?php }  ?>
+                               </select>
+
                             </div>
                            
                         </div>

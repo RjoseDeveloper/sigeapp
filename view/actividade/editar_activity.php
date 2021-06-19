@@ -12,7 +12,7 @@
 		  </div>
 		  <div class="modal-body">
 
-              <form action="../requestCtr/Processa_gestao_pautas.php" name="guardar_actividade" id="guardar_actividade" method="post">
+              <form action="../../requestCtr/Processa_gestao_pautas.php" name="guardar_actividade" id="guardar_actividade" method="post">
 
                   <div class="alert alert-success sms_report" style="color:blue"><h5>Criar actividade</h5></div>
                   <label for="datainicio">Data de Inicio:</label>
@@ -22,6 +22,15 @@
                   <input type="date" name="datafim" id="datafim" class="form-control"/>
                   <label for="actividade">Indicar actividade: </label>
                   <input type="text" name="actividade" id="actividade" value="" class="form-control">
+
+                  <div class="form-group">
+                      <label class="control-label col-sm-4" for="datafim">Taxa: </label>
+                      <div class="col-sm-8">
+
+                          <input type="text" name="taxa" id="taxa" class="form-control"/>
+                      </div>
+
+                  </div>
 
                   <p class="data_dinamics"></p>
                   <button type="reset" class="btn btn-default" data-dismiss="modal">Fechar</button>

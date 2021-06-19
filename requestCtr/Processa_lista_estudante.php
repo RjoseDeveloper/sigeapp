@@ -1,25 +1,17 @@
 ﻿<?php
 
-	session_start();
- 
-
-	require_once("../Query/AllQuerySQL.php");
-	require_once("../controller/DisciplinaCtr.php");
-	require_once("../Query/EstudantesSQL.php");
-	require_once('../Query/PublicacaoPautaSQL.php');
-    require_once('../controller/EstudanteCtr.php');
-    require_once('../dbconf/getConection.php');
+        session_start();
+        require_once("../Query/AllQuerySQL.php");
+        require_once("../Query/EstudantesSQL.php");
+        require_once('../controller/EstudanteCtr.php');
+        require_once('../dbconf/getConection.php');
 
           $query = new QuerySql();
           $sql_estudante = new EstudantesSQL();
           $publicacao = new EstudanteController();
-          $sql_publicacao = new PublicarPauta();
           $idDoc = $query->getDoc_id($_SESSION['username']);
-           $db = new mySQLConnection();
-
-
-
-		$acao= $_REQUEST['acao'];
+          $db = new mySQLConnection();
+          $acao= $_REQUEST['acao'];
 
 		switch($acao){
 
@@ -42,19 +34,16 @@
 
               case 2:
 
-			$descricao = $_REQUEST['term'];
+                    $descricao = $_REQUEST['term'];
 
-			$estudante = $sql_estudante->getIdEstByNameApelido($_SESSION['username'],2);
-			$vetor = $sql_publicacao->listaEstudanteDisp($estudante,$descricao);
-			$result = mysqli_query($db->openConection(),$vetor);
+                    $estudante = $sql_estudante->getIdEstByNameApelido($_SESSION['username'],2);
 
-			while($row[] = mysqli_fetch_assoc($result));
-                  echo json_encode($row);
 
 			break;
 
                       case 3:
           		            $disciplina = $_POST['disp'];
+          		            $curso ='';
                               $query= $sql_estudante->obterEstudantesDisciplina($disciplina, $curso);
                               $result = mysqli_query($db->openConection(),$query);
                               while ($row = mysqli_fetch_assoc($result)){
@@ -69,7 +58,7 @@
                 $cursos = $_POST['curso'];
                 $curso = $query->getDisciplinaDocenteIdCurso($disp, $idDoc);
 		        $result = mysqli_query($db->openConection(),$query->queryAutoComplete($filter,$cursos, $disp));
-echo $query->queryAutoComplete($filter,$cursos, $disp);
+                echo $query->queryAutoComplete($filter,$cursos, $disp);
 
 		        while ($row = mysqli_fetch_assoc($result)){
                 echo  '<li style="width:100%; font-size:12px" class="list-group-item" value="'.$row['numero'].'"
@@ -116,31 +105,11 @@ echo $query->queryAutoComplete($filter,$cursos, $disp);
             break;
 
 
-case 6:
+            case 6:
 
-if (isset($_GET['term'])){
 
-  $row_array = array();
-  $fetch = mysqli_query($con,"SELECT * from utilizador where utilizador.fullname like '%" . mysqli_real_escape_string($con,($_GET['term'])) . "%' LIMIT 0 ,3");
 
-  while ($row = mysqli_fetch_array($fetch)) {
-
-    $row_array['value'] = $row['username'];
-    $row_array['id_aluno']=$row['id'];
-    $row_array['nomeCompleto']=$row['fullname'];
-    $row_array['celular']=$row['celular1'];
-    $row_array['email']=$row['email'];
-   
-    echo json_encode($row_array);
-  
-}
-
-    break;
-
-            case 7:
-                  
-
-                break;
+            break;
 		}
 
 

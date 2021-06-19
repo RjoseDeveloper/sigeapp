@@ -68,6 +68,7 @@ if (empty($_POST['fullname'])){
     $documento = $_POST['bi_recibo'];
     //--$endereco2 =$_POST['endereco2'];
     $idnivelescolar = $_POST['nivelescolar'] ;
+    $classe = $_POST['classe'];
 
     // check if user or email address already exists
     $sql = "SELECT * FROM utilizador WHERE username = '" . $user_name . "' AND email = '" . $user_email . "';";
@@ -79,10 +80,12 @@ if (empty($_POST['fullname'])){
     } else {
 
         // write new user's data into database
-        $sql = "INSERT INTO utilizador (codigo, fullname, sexo, username,password, documento, datanasc, nivelescolar, idprevilegio,iddistrito, estadocivil, email, celular1,celular2, endereco1, endereco2,data_added)
+        $sql = "INSERT INTO utilizador (codigo, fullname, sexo, username,password, documento, 
+                        datanasc, nivelescolar, idprevilegio,iddistrito, estadocivil, email, 
+                        celular1,celular2, endereco1, endereco2,data_added, idcurso)
                             VALUES('".$codigo."','".$fullname."','".$sexo."','".$user_name."','".$user_password."','" . $documento . "','" .$datanasc. "',
                             '" .$idnivelescolar. "','" .$idprevilegio. "','" .$iddistrito. "','".$idestadocivil."','".$user_email."','".$celular1."','".$celular2."'
-                            ,'".$endereco1."','".$endereco1."','".$date_added."')";
+                            ,'".$endereco1."','".$endereco1."','".$date_added."','".$classe."')";
 
         $query_new_user_insert = mysqli_query($con,$sql);
 

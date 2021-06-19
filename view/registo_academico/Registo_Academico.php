@@ -53,8 +53,6 @@ if (!isset($_SESSION['username'])){?>
 
     <?php  include '../layouts/head.php' ?>
 
-   
-    <script type="text/javascript" src="../fragments/js/js_estudante.js"></script>
     <script type="text/javascript" src="../fragments/js/js_function.js"></script>
     <script type="text/javascript" src="../fragments/js/js_registo_academico.js"></script>
 

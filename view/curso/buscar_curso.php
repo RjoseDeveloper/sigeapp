@@ -21,8 +21,6 @@
 		$query=mysqli_query($con, $cursox->check_inserted_row($idcurso));
         $count = mysqli_num_rows($query);
 
-        //echo $cursox->check_inserted_row($idcurso);
-
 		if($count == 0 ){
 
 			if ($delete1=mysqli_query($con,"DELETE FROM curso WHERE idcurso='".$idcurso."'")){

@@ -63,6 +63,17 @@
                         </div>
 
                     </div>
+
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="datafim">Taxa: </label>
+                            <div class="col-sm-8">
+
+                                <input type="text" name="taxa" id="taxa" class="form-control"/>
+                            </div>
+
+                        </div>
+
                   </div>
 
             <div class="modal-footer">

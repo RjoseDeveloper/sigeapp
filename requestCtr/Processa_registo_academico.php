@@ -1,20 +1,19 @@
 <?php
 
 //   require('../dbconf/getConection.php');
-   require_once('../controller/EstudanteNotaCtr.php');
+
    require_once('../Query/AllQuerySQL.php');
    require_once('../Query/EstudantesSQL.php');
    require_once('../Query/RegistoAcademicoSQL.php');
-require_once('../controller/CursoCtr.php');
-    require_once('../controller/DisciplinaCtr.php');
-    require_once('../controller/DocenteCtr.php');
+    require_once('../controller/CursoCtr.php');
+
     require_once('../controller/EstudanteCtr.php');
 
    $query = new QuerySql();
    $ra_sql = new RegistoAcademicoSQL();
    $curso_ctr = new CursoController();
 
-    $docente_ctr = new DocenteController();
+
     $estudante_ctr = new EstudanteController();
 
 //   $db = new mySQLConnection();

@@ -28,18 +28,20 @@ CREATE TABLE IF NOT EXISTS `actividade` (
   `idutilizador` int(11) DEFAULT NULL,
   `idcurso` int(11) NOT NULL,
   `data_added` date DEFAULT NULL,
+  `taxa` double DEFAULT NULL,
   PRIMARY KEY (`idactividade`,`idcurso`),
   KEY `idutilizador` (`idutilizador`),
   KEY `idcurso` (`idcurso`),
   CONSTRAINT `actividade_ibfk_1` FOREIGN KEY (`idutilizador`) REFERENCES `utilizador` (`id`),
   CONSTRAINT `actividade_ibfk_2` FOREIGN KEY (`idcurso`) REFERENCES `curso` (`idcurso`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
--- Dumping data for table sigairis.actividade: ~0 rows (approximately)
+-- Dumping data for table sigairis.actividade: ~2 rows (approximately)
 DELETE FROM `actividade`;
 /*!40000 ALTER TABLE `actividade` DISABLE KEYS */;
-INSERT INTO `actividade` (`idactividade`, `descricao`, `data_inicio`, `data_fim`, `idutilizador`, `idcurso`, `data_added`) VALUES
-	(1, 'Matriculas', '2021-06-16', '2021-07-16', 1, 1, '2021-06-16');
+INSERT INTO `actividade` (`idactividade`, `descricao`, `data_inicio`, `data_fim`, `idutilizador`, `idcurso`, `data_added`, `taxa`) VALUES
+	(1, 'Matriculas', '2021-06-16', '2021-07-16', 1, 1, '2021-06-16', 1000),
+	(2, 'Exame 1 Epoca', '2021-06-18', '2021-07-10', 1, 1, '2021-06-19', 200);
 /*!40000 ALTER TABLE `actividade` ENABLE KEYS */;
 
 -- Dumping structure for table sigairis.curso
@@ -82,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `despesa` (
   KEY `idutilizador` (`idutilizador`),
   CONSTRAINT `despesa_ibfk_1` FOREIGN KEY (`idorcamento`) REFERENCES `orcamento` (`idorcamneto`),
   CONSTRAINT `despesa_ibfk_2` FOREIGN KEY (`idutilizador`) REFERENCES `utilizador` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table sigairis.despesa: ~0 rows (approximately)
 DELETE FROM `despesa`;
@@ -187,7 +189,7 @@ CREATE TABLE IF NOT EXISTS `juro` (
   PRIMARY KEY (`idjuro`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Dumping data for table sigairis.juro: ~0 rows (approximately)
+-- Dumping data for table sigairis.juro: ~2 rows (approximately)
 DELETE FROM `juro`;
 /*!40000 ALTER TABLE `juro` DISABLE KEYS */;
 INSERT INTO `juro` (`idjuro`, `juro`) VALUES
@@ -258,7 +260,7 @@ CREATE TABLE IF NOT EXISTS `periodo` (
   PRIMARY KEY (`idperiodo`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
--- Dumping data for table sigairis.periodo: ~0 rows (approximately)
+-- Dumping data for table sigairis.periodo: ~2 rows (approximately)
 DELETE FROM `periodo`;
 /*!40000 ALTER TABLE `periodo` DISABLE KEYS */;
 INSERT INTO `periodo` (`idperiodo`, `descricao`) VALUES
@@ -274,28 +276,31 @@ CREATE TABLE IF NOT EXISTS `prestacao` (
   `idjuro` int(11) NOT NULL DEFAULT '0',
   `status` int(11) NOT NULL,
   `modepay` varchar(255) DEFAULT NULL,
-  `idfinalidade` int(11) NOT NULL,
+  `idactividade` int(11) NOT NULL DEFAULT '0',
   `idcurso` int(11) NOT NULL,
-  `idaluno` int(11) NOT NULL,
+  `iduser` int(11) DEFAULT NULL,
   `user_session_id` int(11) NOT NULL,
-  PRIMARY KEY (`idjuro`,`status`,`idfinalidade`,`idcurso`,`idaluno`),
   KEY `idpagamento` (`idjuro`),
-  KEY `idfinalidade` (`idfinalidade`),
   KEY `idcurso` (`idcurso`),
-  KEY `idaluno` (`idaluno`),
   KEY `user_session_id` (`user_session_id`),
   KEY `status` (`status`),
-  CONSTRAINT `prestacao_ibfk_2` FOREIGN KEY (`idjuro`) REFERENCES `juro` (`idjuro`),
-  CONSTRAINT `prestacao_ibfk_4` FOREIGN KEY (`idfinalidade`) REFERENCES `pay_finality` (`idfinalidade`),
-  CONSTRAINT `prestacao_ibfk_5` FOREIGN KEY (`idcurso`) REFERENCES `curso` (`idcurso`),
-  CONSTRAINT `prestacao_ibfk_6` FOREIGN KEY (`idaluno`) REFERENCES `aluno` (`idaluno`),
-  CONSTRAINT `prestacao_ibfk_7` FOREIGN KEY (`user_session_id`) REFERENCES `utilizador` (`id`),
-  CONSTRAINT `prestacao_ibfk_8` FOREIGN KEY (`status`) REFERENCES `status` (`idstatus`)
+  KEY `FK_prestacao_utilizador` (`iduser`),
+  KEY `FK_prestacao_actividade` (`idactividade`),
+  CONSTRAINT `FK_prestacao_actividade` FOREIGN KEY (`idactividade`) REFERENCES `actividade` (`idactividade`),
+  CONSTRAINT `FK_prestacao_utilizador` FOREIGN KEY (`iduser`) REFERENCES `utilizador` (`id`) ON UPDATE NO ACTION,
+  CONSTRAINT `prestacao_ibfk_2` FOREIGN KEY (`idjuro`) REFERENCES `juro` (`idjuro`) ON UPDATE NO ACTION,
+  CONSTRAINT `prestacao_ibfk_5` FOREIGN KEY (`idcurso`) REFERENCES `curso` (`idcurso`) ON UPDATE NO ACTION,
+  CONSTRAINT `prestacao_ibfk_7` FOREIGN KEY (`user_session_id`) REFERENCES `utilizador` (`id`) ON UPDATE NO ACTION,
+  CONSTRAINT `prestacao_ibfk_8` FOREIGN KEY (`status`) REFERENCES `status` (`idstatus`) ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table sigairis.prestacao: ~0 rows (approximately)
+-- Dumping data for table sigairis.prestacao: ~3 rows (approximately)
 DELETE FROM `prestacao`;
 /*!40000 ALTER TABLE `prestacao` DISABLE KEYS */;
+INSERT INTO `prestacao` (`valor`, `datapay`, `idjuro`, `status`, `modepay`, `idactividade`, `idcurso`, `iduser`, `user_session_id`) VALUES
+	(202, '2021-06-19', 1, 1, 'Cash', 2, 1, 4, 1),
+	(1010, '2021-06-19', 1, 1, 'Cash', 1, 1, 2, 1),
+	(202, '2021-06-19', 1, 1, 'Cash', 2, 1, 2, 1);
 /*!40000 ALTER TABLE `prestacao` ENABLE KEYS */;
 
 -- Dumping structure for table sigairis.previlegio
@@ -307,7 +312,7 @@ CREATE TABLE IF NOT EXISTS `previlegio` (
   PRIMARY KEY (`idprevilegio`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Dumping data for table sigairis.previlegio: ~3 rows (approximately)
+-- Dumping data for table sigairis.previlegio: ~2 rows (approximately)
 DELETE FROM `previlegio`;
 /*!40000 ALTER TABLE `previlegio` DISABLE KEYS */;
 INSERT INTO `previlegio` (`idprevilegio`, `descricao`, `tipo`) VALUES
@@ -339,11 +344,17 @@ CREATE TABLE IF NOT EXISTS `status` (
   `value` int(11) NOT NULL,
   `descricao` varchar(255) NOT NULL,
   PRIMARY KEY (`idstatus`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
--- Dumping data for table sigairis.status: ~0 rows (approximately)
+-- Dumping data for table sigairis.status: ~5 rows (approximately)
 DELETE FROM `status`;
 /*!40000 ALTER TABLE `status` DISABLE KEYS */;
+INSERT INTO `status` (`idstatus`, `value`, `descricao`) VALUES
+	(1, 1, 'Pago'),
+	(2, 2, 'Nao Pago'),
+	(3, 3, 'Activo'),
+	(4, 4, 'Inativo'),
+	(5, 5, 'Em andamento');
 /*!40000 ALTER TABLE `status` ENABLE KEYS */;
 
 -- Dumping structure for table sigairis.turma
@@ -357,7 +368,7 @@ CREATE TABLE IF NOT EXISTS `turma` (
   CONSTRAINT `turma_ibfk_1` FOREIGN KEY (`idcurso`) REFERENCES `curso` (`idcurso`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
--- Dumping data for table sigairis.turma: ~0 rows (approximately)
+-- Dumping data for table sigairis.turma: ~5 rows (approximately)
 DELETE FROM `turma`;
 /*!40000 ALTER TABLE `turma` DISABLE KEYS */;
 INSERT INTO `turma` (`idturma`, `descricao`, `idcurso`) VALUES
@@ -402,18 +413,25 @@ CREATE TABLE IF NOT EXISTS `utilizador` (
   `endereco1` varchar(255) DEFAULT NULL,
   `endereco2` varchar(255) DEFAULT NULL,
   `data_added` date NOT NULL,
+  `idcurso` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idprevilegio` (`idprevilegio`),
   KEY `FK_utilizador_distrito` (`iddistrito`),
+  KEY `FK_utilizador_curso` (`idcurso`),
+  CONSTRAINT `FK_utilizador_curso` FOREIGN KEY (`idcurso`) REFERENCES `curso` (`idcurso`),
   CONSTRAINT `FK_utilizador_distrito` FOREIGN KEY (`iddistrito`) REFERENCES `distrito` (`iddistrito`),
   CONSTRAINT `utilizador_ibfk_2` FOREIGN KEY (`idprevilegio`) REFERENCES `previlegio` (`idprevilegio`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
--- Dumping data for table sigairis.utilizador: ~1 rows (approximately)
+-- Dumping data for table sigairis.utilizador: ~4 rows (approximately)
 DELETE FROM `utilizador`;
 /*!40000 ALTER TABLE `utilizador` DISABLE KEYS */;
-INSERT INTO `utilizador` (`id`, `codigo`, `fullname`, `sexo`, `username`, `password`, `documento`, `datanasc`, `nivelescolar`, `idprevilegio`, `iddistrito`, `estadocivil`, `email`, `celular1`, `celular2`, `endereco1`, `endereco2`, `data_added`) VALUES
-	(1, '9762021', 'Caudencio da Silva Fernando', 'M', 'csilva', '123456', '018800291892', '2021-06-16', 1, 2, 1, 1, 'csilva@gmail.com', '8490018289', '92839200', 'Natite', 'Natite', '2021-06-16');
+INSERT INTO `utilizador` (`id`, `codigo`, `fullname`, `sexo`, `username`, `password`, `documento`, `datanasc`, `nivelescolar`, `idprevilegio`, `iddistrito`, `estadocivil`, `email`, `celular1`, `celular2`, `endereco1`, `endereco2`, `data_added`, `idcurso`) VALUES
+	(1, '9762021', 'Caudencio da Silva Fernando', 'M', 'csilva', '123456', '018800291892', '2021-06-16', 1, 2, 1, 1, 'csilva@gmail.com', '8490018289', '92839200', 'Natite', 'Natite', '2021-06-16', NULL),
+	(2, '992021', 'Raimundo Jose', 'M', 'rjose', '123456', '902913`132`3', '2021-06-18', 4, 1, 1, 1, 'jhraimundo3@gmail.com', '91723737723', '', 'Natite', 'Natite', '2021-06-18', 1),
+	(3, '072021', 'Amelia Camilo', 'F', 'acamilo', '123456', '0192735671882', '2021-06-08', 1, 1, 1, 1, 'acamilo@gmail.com', '8590937782', '81225627281', 'Gingone', 'Gingone', '2021-06-18', 1),
+	(4, '2752021', 'Ana Camilo', 'F', 'asintia', '123456', '0192735671882', '2021-06-08', 1, 1, 1, 1, 'asintia@gmail.com', '8590937782', '81225627281', 'Gingone', 'Gingone', '2021-06-18', 1),
+	(5, '42021', 'Emenia Camilo', 'F', 'ecamilo', '123456', '9129139217390273', '2021-06-08', 1, 1, 2, 1, 'ecamilo@gmail.com', '892383', '22182838', 'Natite', 'Natite', '2021-06-19', 1);
 /*!40000 ALTER TABLE `utilizador` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

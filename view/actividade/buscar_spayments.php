@@ -104,6 +104,7 @@ INNER JOIN utilizador ON actividade.idutilizador = utilizador.id';
 					<th>Data de Fim</th>
                     <th>Registado Pelo/</th>
                     <th>Data de Registo</th>
+                    <th>Taxa Aplicada</th>
 					<th><span class="pull-right">Acções</span></th>
 					
 				</tr>
@@ -118,6 +119,7 @@ INNER JOIN utilizador ON actividade.idutilizador = utilizador.id';
 						$di=$row['data_inicio'];
                         $df=$row['data_fim'];
                         $user=$row['fullname'];
+                    $taxa=$row['taxa'];
 						$date_added= date('d/m/Y', strtotime($row['data_added']));
 					?>
 					
@@ -125,6 +127,7 @@ INNER JOIN utilizador ON actividade.idutilizador = utilizador.id';
 					<input type="hidden" value="<?php echo $row['curso'];?>" id="apellidos<?php echo $_id;?>">
 					<input type="hidden" value="<?php echo $di;?>" id="usuario<?php echo $_id;?>">
 					<input type="hidden" value="<?php echo $df;?>" id="email<?php echo $_id;?>">
+                    <input type="hidden" value="<?php echo $df;?>" id="taxa<?php echo $_id;?>">
 				
 					<tr>
 						<td><?php echo $i; ?></td>
@@ -134,6 +137,7 @@ INNER JOIN utilizador ON actividade.idutilizador = utilizador.id';
 						<td><?php echo $df;?></td>
                         <td><?php echo $user;?></td>
                         <td><?php echo $date_added;?></td>
+                        <td><?php echo $taxa;?></td>
 						
 					<td ><span class="pull-right">
 					<a href="#" class='btn btn-default' title='Editar Professor' data-backdrop="false"

@@ -1,17 +1,10 @@
 <?php
 
    require_once '../view/ajax/is_logged.php';
-
-   require_once('../Query/PublicacaoPautaSQL.php');
    require_once('../dbconf/getConection.php');
-   require_once('../controller/EstudanteNotaCtr.php');
-   require_once('../controller/PautaNormalCtr.php');
    require_once('../Query/AllQuerySQL.php');
-
    require_once('../Query/EstudantesSQL.php');
-   require_once('../controller/PautaNormalCtr.php');
-   require_once('../Query/PublicacaoPautaSQL.php');
-    require_once('../controller/EstudanteCtr.php');
+   require_once('../controller/EstudanteCtr.php');
 
 
    $query = new QuerySql();
@@ -21,8 +14,8 @@
    $idaluno= $ctr_est->getIdEstudante($_SESSION['username'],0);
    $idDoc = $query->getDoc_id($_SESSION['username']);
    $idcurso = $ctr_est->obterIdCursoEstudante($ctr_est->getIdEstudante($_SESSION['username'],1));
-$semestre = date('m') < 7 ? '1º':' 2º';
-$ano = date('Y');
+    $semestre = date('m') < 7 ? '1º':' 2º';
+    $ano = date('Y');
 
 
     $acao = $_POST['acao'];
@@ -93,7 +86,7 @@ $ano = date('Y');
                 $query = $ctr_est->buscarDadosDisciplina($idDisp,$query->getDocenteIdCurso($idDisp, $idDoc));
 
                 $result = mysqli_query($db->openConection(), $query);
-                $t=0; $curso; $semestre;
+                $t=0;  $semestre;
 
                 echo '<h3>Docente da Disciplina </h3>';
 

@@ -5,12 +5,12 @@
 include('../ajax/is_logged.php');//Archivo verifica que el usario que intenta acceder a la URL esta logueado
 require_once("../../Query/ContabilidadeSQL.php");
 $session_id= session_id();
+$idaluno=$_REQUEST['idaluno'];
 
-if (isset($_REQUEST['idaluno'])) {
-    $id=$_REQUEST['idaluno'];
-}else{
-
+if (isset($_REQUEST['finality'])){
+    $idactividade = $_REQUEST['finality'];
 }
+
 
 //if (isset($_POST['cantidad'])){$cantidad=$_POST['cantidad'];}
 //if (isset($_POST['precio_venta'])){$precio_venta=$_POST['precio_venta'];}
@@ -22,13 +22,13 @@ $con = $db->openConection();
 if (isset($_GET['id']))//codigo elimina un elemento del array
 {
 $id_tmp=intval($_GET['id']);
-$delete=mysqli_query($con, "DELETE FROM prestacao WHERE idaluno='".$id_tmp."'");
+$delete=mysqli_query($con, "DELETE FROM prestacao WHERE iduser='".$id_tmp."'");
 }
 
 $simbolo_moneda="MZN";
-
 $contas = new ContabilidadeSQL();
 ?>
+
 <table class="table">
 <tr>
 	<th class='text-center'>CODIGO</th>
@@ -45,39 +45,34 @@ $contas = new ContabilidadeSQL();
 
 <?php
 
-	$sql=mysqli_query($con, $contas->all_paymantes($id));
-//echo $contas->all_paymantes($id);
+	$sql=mysqli_query($con, $contas->all_paymantes('one',$idaluno));
+    //echo $contas->all_paymantes('one',$idaluno);
     $subtotal=0;
     $total_iva=0;
     $total_factura=0;
-$subtotal_juro =0;
-$valor_a_pagar=0;
+    $subtotal_juro =0;
+    $valor_a_pagar=0;
 
-while ($row=mysqli_fetch_array($sql))
+    while ($row=mysqli_fetch_array($sql))
 	{
-	    $idaluno=$row["idaluno"];
-        $nr_mec=$row["nr_mec"];
-	    $fullname=$row['nomeCompleto'];
-	    $details=$row['finalidade'];
+	    $idaluno=$row["id"];
+        $nr_mec=$row["codigo"];
+	    $fullname=$row['fullname'];
+	    $details=$row['descricao'];
 	    $status=$row['status'];
-	    $taxa=$row['valor'];
+	    $montante=$row['valor'];
         $celualr=$row['celular'];
         $juro=$row['juro'];
         $data_aded=$row['datapay'];
-        $idfinalidade = $row['idfinalidade'];
-
+        $taxa = $row['taxa'];
         $cal_juro = ($juro*$taxa)/100;
         $subtotal_juro = $cal_juro + $taxa;
         $valor_a_pagar=0;
 
         if ($status == -1){$text_estado="Pagar";$label_class='label-warning';}
         else{$text_estado="Paga";$label_class='label-success';}
-        $rs = mysqli_query($con,"select pay_finality.taxa from pay_finality WHERE idfinalidade=".$idfinalidade);
-        if($rw = mysqli_fetch_assoc($rs)){
-            $valor_a_pagar = $rw['taxa'];
-        }
-
-        $divida = $valor_a_pagar - $taxa;
+        $valor_a_pagar = $taxa;
+        $divida = $valor_a_pagar - $montante;
 	
 		?>
 		<tr>

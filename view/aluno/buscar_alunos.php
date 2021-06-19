@@ -119,6 +119,7 @@ if ($action == 'ajax') {
                     <th>Naturalidade</th>
                     <th>Morada</th>
                     <th>Sexo</th>
+                    <th>Classe</th>
                     <th>Data de Ingresso</th>
                     <th class='text-right'>Acções</th>
 
@@ -131,39 +132,20 @@ if ($action == 'ajax') {
                     $fullname = $row['fullname'];
                     $sexo = $row['sexo'];
                     $endereco = $row['endereco1'];
-                    $celular1 = $row['celular1'];
                     $distrito = $row['descricao'];
-                    $bi_recibo = $row['documento'];
-
-                    $endereco = $row['endereco1'];
-                    $estadocivil = $row['estadocivil'];
-
-                    $data = $row['datanasc'];
+                    $classe = $row['curso'];
                     $date_added = date('d/m/Y', strtotime($row['data_added']));
 
                     ?>
 
-                    <input type="hidden" value="<?php echo htmlentities($nr_mec); ?>"
-                           id="nrmec<?php echo $id_aluno;?>">
-
-                    <input type="hidden" value="<?php echo $fullname; ?>"
-                           id="fullname<?php echo $id_aluno;?>">
-
-                    <input type="hidden" value="<?php echo $nome;?>"
-                           id="nome<?php echo $id_aluno;?>">
-
-                    <input type="hidden" value="<?php echo $apelido;?>"
-                           id="apelido<?php echo $id_aluno;?>">
-
-                    <input type="hidden" value="<?php echo $bi_recibo;?>"
-                           id="bi_recibo<?php echo $id_aluno;?>">
                     <tr>
                         <td><?php echo $id_aluno; ?></td>
                         <td><?php echo $nr_mec; ?></td>
-                        <td style="text-align: left"><?php echo $fullname; ?></td>
+                        <td><?php echo $fullname; ?></td>
                         <td><?php echo $distrito;?></td>
                         <td><?php echo $endereco;?></td>
                         <td><?php echo $sexo;?></td>
+                        <td><?php echo $classe;?></td>
                         <td><?php echo $date_added;?></td>
 
                         <td><span class="pull-right">

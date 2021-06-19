@@ -19,7 +19,7 @@ $con = $db->openConection();
 <html lang="en">
   <head>
     <?php include("../layouts/head.php");?>
-    <script type="text/javascript" src="./bibliotecas/jQuery/js/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="../bibliotecas/jQuery/js/jquery-1.11.2.min.js"></script>
    
   </head>
   <body>
@@ -59,12 +59,16 @@ $con = $db->openConection();
 
 							<label for="finality" class="col-md-1 control-label">Finalidade:</label>
 							<div class="col-md-3">
-								<select class="form-control input-sm" id="finality" name="finality">
-									<?php
-										$sql_vendedor=mysqli_query($con,"select * from pay_finality");
-										while ($rw=mysqli_fetch_array($sql_vendedor)){?>
-											<option value="<?php echo $rw['idfinalidade'] ?>"><?php echo $rw["finalidade"]?></option>
-											<?php }?>
+								<select class="form-control input-sm" id="finality"
+                                        name="finality" onchange="get_value(this.value)">
+                                    <?php
+                                    $sql_juro=mysqli_query($con,"select * from actividade");
+                                    while ($rw=mysqli_fetch_array($sql_juro)){?>
+                                        <option value="<?php echo $rw['idactividade']?>"><?php echo $rw["descricao"]. ' - ('. $rw["taxa"].')'?></option>
+<!--                                        <input type="hidden" name="taxa" id="taxa" value="--><?php //$rw["taxa"];?><!--">-->
+<!--                                    -->
+                                    <?php }?>
+
 								</select>
 							</div>
 
@@ -73,7 +77,7 @@ $con = $db->openConection();
 
                                     <select class="form-control input-sm" id="status" name="status">
                                         <?php
-                                        $sql_juro=mysqli_query($con,"select * from status_payments");
+                                        $sql_juro=mysqli_query($con,"select * from status");
                                         while ($rw=mysqli_fetch_array($sql_juro)){?>
                                             <option value="<?php echo $rw['idstatus']?>"><?php echo $rw["descricao"]?></option>
                                         <?php }?>
@@ -139,7 +143,6 @@ $con = $db->openConection();
 
 			</form>
 
-
             <div id="resultados_x"></div>
 		<div id="resultados" class='col-md-12' style="margin-top:10px"></div>
 
@@ -159,6 +162,8 @@ $con = $db->openConection();
          *  form that send data to data inscricao
          */
 
+
+
         $("#btn_save_payments").click(function(){
             var parametros = "";
 
@@ -176,7 +181,7 @@ $con = $db->openConection();
 
                  $.ajax({
                      type: "POST",
-                     url: "./register/factura.php",
+                     url: "factura.php",
                      data: {
                          id_aluno: id_cliente, finality: fnl,
                          modo_pay: mdp, juro: jr, valor: vl, curso: c, status: sts
@@ -188,56 +193,65 @@ $con = $db->openConection();
                          $("#resultados_x").html(datos);
                          load(id_cliente);
                          //VentanaCentrada('./pdf/documentos/factura_pdf.php?id_aluno=' + id_cliente + 'Factura', '', '1024', '768', 'true');
-
                      }
                  });
              }
-
             });
 
+        function get_value(item){
+            //$('#valor').val($('$taxa').val());
 
+            }
 
         function _autocomplete(val){
             var html ="";
             if (val.length >0) {
-
                 $('#dados_auto').show();
 
                 $.ajax({
-                    url: "requestCtr/Processa_lista_estudante.php",
+                    url: "../../requestCtr/Processa_auto_filter.php",
                     data: {term: val},
                     dataType: 'json',
-                    success: function (data) {
-                        alert(data.id_aluno);
+                    success: function (datos) {
 
                         html += '<ul class="list-group">';
-                        html += '<li class="list-group-item" onclick="hiden(this.value)" value="'+data.id_aluno+'"><a>' + data.nomeCompleto + '</a>' +
-                        ' <span class="glyphicon glyphicon-chevron-right pull-right"></span></li>';
+                        for (var i =0 ; i< datos.length; i++) {
 
-                        $('#id_aluno').val(data.id_aluno);
-                        $('#nombre_cliente').val(data.nomeCompleto);
-                        $('#tel1').val(data.celular);
-                        $('#mail').val(data.email);
+                            html += '<li class="list-group-item" onclick="hiden(this.value)"' +
+                                ' value="' + datos[i].id_aluno + '"><a>' + datos[i].fullname + '</a>' +
+                                ' <span class="glyphicon glyphicon-chevron-right pull-right"></span></li>';
+
+                            $('#id_aluno').val(datos[i].id_aluno);
+                            $('#nombre_cliente').val(datos[i].fullname);
+                            $('#tel1').val(datos[i].celular);
+                            $('#mail').val(datos[i].email);
+                        }
+
+
+
                         html += '</ul>';
                         $('#dados_auto').html(html);
                     }
                 })
             }
         }
+
+
+
         function hiden(item){
             $('#dados_auto').hide();
             $('#id_aluno').val(item);
 
             $.ajax({
                 type: "POST",
-                url: "./ajax/agregar_facturacion.php",
+                url: "agregar_facturacion.php",
                 data: "idaluno=" + item,
                 beforeSend: function (objeto) {
                     $("#resultados").html("Mensagem: Carregando...");
                 },
                 success: function (datos) {
                     $("#resultados").html(datos);
-                    //VentanaCentrada('./pdf/documentos/factura_pdf.php?id_cliente=' + id_cliente + '&id_vendedor=' + id_vendedor + '&condiciones=' + condiciones, 'Factura', '', '1024', '768', 'true');
+                    VentanaCentrada('./pdf/documentos/factura_pdf.php?id_cliente=' + id_cliente + '&id_vendedor=' + id_vendedor + '&condiciones=' + condiciones, 'Factura', '', '1024', '768', 'true');
                 }
             });
         }
@@ -248,7 +262,7 @@ $con = $db->openConection();
             var q= $("#q").val();
             $("#loader").fadeIn('slow');
             $.ajax({
-                url:'./ajax/agregar_facturacion.php?idaluno='+page,
+                url:'agregar_facturacion.php?idaluno='+page,
                 beforeSend: function(objeto){
                     $('#loader').html('<img src="../fragments/img/ajax-loader.gif"> Carregando...');
                 },

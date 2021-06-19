@@ -327,7 +327,9 @@ $con = $db->openConection();
                                 <label  for="nrmec" class="control-label">Endereco:</label>
                                 <input style=" color: #0000CC" type="text" class="form-control" id="endereco1" name="endereco1" placeholder="Morada, bairro">
                                 <input name="previlegio" id="previlegio" value="1" type="hidden"/>
-                            </div>
+                               <input type="hidden" class="form-control" id="classe" name="classe " value="">
+
+                           </div>
                            
                         </div>
 

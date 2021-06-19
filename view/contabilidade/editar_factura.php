@@ -1,6 +1,6 @@
 <?php
 	include('../ajax/is_logged.php');//Archivo verifica que el usario que intenta acceder a la URL esta logueado
-	$id_factura= $_SESSION['id_factura'];
+	$id_factura= $_GET['id_factura'];
 	/*Inicia validacion del lado del servidor*/
 	if (empty($_POST['id_cliente'])) {
            $errors[] = "ID vacío";
